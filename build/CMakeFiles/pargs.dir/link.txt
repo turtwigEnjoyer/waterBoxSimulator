@@ -1,0 +1,2 @@
+/usr/bin/ar qc libpargs.a CMakeFiles/pargs.dir/progargs.cpp.o
+/usr/bin/ranlib libpargs.a
