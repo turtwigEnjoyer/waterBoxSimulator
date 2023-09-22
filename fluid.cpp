@@ -10,7 +10,8 @@ int main(int argc, char** argv)
 		cout<<argv[i]<< " =" << i<<endl;
 	}
 	cout << atoi(argv[1]) << endl;
-	pargs::checkParams(argc, argv);
+	int out= pargs::checkParams(argc, argv);
+	if(out<0) return out;
 
 	cout << "Hello World" << endl;
 

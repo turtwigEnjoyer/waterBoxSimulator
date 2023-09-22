@@ -15,22 +15,34 @@ bool isNumber(const char* str){
 	}
 	return true;
 }
-void pargs::checkParams(int argc, char** argv) {
+
+int pargs::checkParams(int argc, char** argv) {
 	if (argc != 3) {
-		cout << "Invalid number of args\n";
-		//throw INVALID_NUMBER_ARGS;
-		return;
+		cout << "Error: Invalid number of arguments: "<< argc-1 << "\n";
+		return -1;
 	}
 	if (!isNumber(argv[1])){
-		cout << "NAN \n";
+		cout << "Error: time steps must be numeric.\n";
+		return -1;
 	}
-	
+	if (argv[1][0]=='-'){
+		cout << "Error: Invalid number of time steps.\n";
+		return -2;
+	}
+
 	int np = atoi(argv[1]);
 	ifstream inputFile (argv[2], ios::binary);
+	ofstream outputFile(argv[3], ios::binary);
+
 	if (!inputFile) {
-		cout <<"Unreachable";
-		//throw IN_FILE_UNREACHABLE;
+		cout <<"Error: Cannot open init.fld for reading\n";
+		return -3;
 	}
+	if(!outputFile){
+		cout << "Error: Cannot open final.fld for writing\n";
+		return -4;
+	}
+	// Check input file
 	return;
 
 }
