@@ -43,6 +43,6 @@ int pargs::checkParams(int argc, char** argv) {
 		return -4;
 	}
 	// Check input file
-	return;
+	return 1;
 
 }
