@@ -17,7 +17,7 @@ bool isNumber(const char* str){
 }
 
 int pargs::checkParams(int argc, char** argv) {
-	if (argc != 3) {
+	if (argc != 4) {
 		cout << "Error: Invalid number of arguments: "<< argc-1 << "\n";
 		return -1;
 	}
