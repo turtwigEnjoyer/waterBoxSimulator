@@ -1,2 +1,0 @@
-/usr/bin/ar qc libprogargs.a CMakeFiles/progargs.dir/progargs.cpp.o
-/usr/bin/ranlib libprogargs.a

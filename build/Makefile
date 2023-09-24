@@ -211,30 +211,6 @@ fluid.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/fluid.dir/build.make CMakeFiles/fluid.dir/fluid.cpp.s
 .PHONY : fluid.cpp.s
 
-hello.o: hello.cpp.o
-.PHONY : hello.o
-
-# target to build an object file
-hello.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/fluid.dir/build.make CMakeFiles/fluid.dir/hello.cpp.o
-.PHONY : hello.cpp.o
-
-hello.i: hello.cpp.i
-.PHONY : hello.i
-
-# target to preprocess a source file
-hello.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/fluid.dir/build.make CMakeFiles/fluid.dir/hello.cpp.i
-.PHONY : hello.cpp.i
-
-hello.s: hello.cpp.s
-.PHONY : hello.s
-
-# target to generate assembly for a file
-hello.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/fluid.dir/build.make CMakeFiles/fluid.dir/hello.cpp.s
-.PHONY : hello.cpp.s
-
 progargs.o: progargs.cpp.o
 .PHONY : progargs.o
 
@@ -276,9 +252,6 @@ help:
 	@echo "... fluid.o"
 	@echo "... fluid.i"
 	@echo "... fluid.s"
-	@echo "... hello.o"
-	@echo "... hello.i"
-	@echo "... hello.s"
 	@echo "... progargs.o"
 	@echo "... progargs.i"
 	@echo "... progargs.s"

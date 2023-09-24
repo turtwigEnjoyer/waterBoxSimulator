@@ -83,7 +83,7 @@ clean: CMakeFiles/fluid.dir/clean
 CMakeFiles/pargs.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/pargs.dir/build.make CMakeFiles/pargs.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/pargs.dir/build.make CMakeFiles/pargs.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/nora/Projects/waterBoxSimulator/build/CMakeFiles --progress-num=4,5 "Built target pargs"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/nora/Projects/waterBoxSimulator/build/CMakeFiles --progress-num=3,4 "Built target pargs"
 .PHONY : CMakeFiles/pargs.dir/all
 
 # Build rule for subdir invocation for target.
@@ -109,12 +109,12 @@ CMakeFiles/pargs.dir/clean:
 CMakeFiles/fluid.dir/all: CMakeFiles/pargs.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/fluid.dir/build.make CMakeFiles/fluid.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/fluid.dir/build.make CMakeFiles/fluid.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/nora/Projects/waterBoxSimulator/build/CMakeFiles --progress-num=1,2,3 "Built target fluid"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/nora/Projects/waterBoxSimulator/build/CMakeFiles --progress-num=1,2 "Built target fluid"
 .PHONY : CMakeFiles/fluid.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/fluid.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/nora/Projects/waterBoxSimulator/build/CMakeFiles 5
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/nora/Projects/waterBoxSimulator/build/CMakeFiles 4
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/fluid.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/nora/Projects/waterBoxSimulator/build/CMakeFiles 0
 .PHONY : CMakeFiles/fluid.dir/rule

@@ -73,15 +73,15 @@ CMakeFiles/pargs.dir/progargs.cpp.o: CMakeFiles/pargs.dir/flags.make
 CMakeFiles/pargs.dir/progargs.cpp.o: /home/nora/Projects/waterBoxSimulator/progargs.cpp
 CMakeFiles/pargs.dir/progargs.cpp.o: CMakeFiles/pargs.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nora/Projects/waterBoxSimulator/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/pargs.dir/progargs.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/pargs.dir/progargs.cpp.o -MF CMakeFiles/pargs.dir/progargs.cpp.o.d -o CMakeFiles/pargs.dir/progargs.cpp.o -c /home/nora/Projects/waterBoxSimulator/progargs.cpp
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/pargs.dir/progargs.cpp.o -MF CMakeFiles/pargs.dir/progargs.cpp.o.d -o CMakeFiles/pargs.dir/progargs.cpp.o -c /home/nora/Projects/waterBoxSimulator/progargs.cpp
 
 CMakeFiles/pargs.dir/progargs.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/pargs.dir/progargs.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/nora/Projects/waterBoxSimulator/progargs.cpp > CMakeFiles/pargs.dir/progargs.cpp.i
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/nora/Projects/waterBoxSimulator/progargs.cpp > CMakeFiles/pargs.dir/progargs.cpp.i
 
 CMakeFiles/pargs.dir/progargs.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/pargs.dir/progargs.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/nora/Projects/waterBoxSimulator/progargs.cpp -o CMakeFiles/pargs.dir/progargs.cpp.s
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/nora/Projects/waterBoxSimulator/progargs.cpp -o CMakeFiles/pargs.dir/progargs.cpp.s
 
 # Object files for target pargs
 pargs_OBJECTS = \
