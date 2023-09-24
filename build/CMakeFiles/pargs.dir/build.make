@@ -73,27 +73,43 @@ CMakeFiles/pargs.dir/progargs.cpp.o: CMakeFiles/pargs.dir/flags.make
 CMakeFiles/pargs.dir/progargs.cpp.o: /home/nora/Projects/waterBoxSimulator/progargs.cpp
 CMakeFiles/pargs.dir/progargs.cpp.o: CMakeFiles/pargs.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nora/Projects/waterBoxSimulator/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/pargs.dir/progargs.cpp.o"
-	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/pargs.dir/progargs.cpp.o -MF CMakeFiles/pargs.dir/progargs.cpp.o.d -o CMakeFiles/pargs.dir/progargs.cpp.o -c /home/nora/Projects/waterBoxSimulator/progargs.cpp
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/pargs.dir/progargs.cpp.o -MF CMakeFiles/pargs.dir/progargs.cpp.o.d -o CMakeFiles/pargs.dir/progargs.cpp.o -c /home/nora/Projects/waterBoxSimulator/progargs.cpp
 
 CMakeFiles/pargs.dir/progargs.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/pargs.dir/progargs.cpp.i"
-	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/nora/Projects/waterBoxSimulator/progargs.cpp > CMakeFiles/pargs.dir/progargs.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/nora/Projects/waterBoxSimulator/progargs.cpp > CMakeFiles/pargs.dir/progargs.cpp.i
 
 CMakeFiles/pargs.dir/progargs.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/pargs.dir/progargs.cpp.s"
-	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/nora/Projects/waterBoxSimulator/progargs.cpp -o CMakeFiles/pargs.dir/progargs.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/nora/Projects/waterBoxSimulator/progargs.cpp -o CMakeFiles/pargs.dir/progargs.cpp.s
+
+CMakeFiles/pargs.dir/particle.cpp.o: CMakeFiles/pargs.dir/flags.make
+CMakeFiles/pargs.dir/particle.cpp.o: /home/nora/Projects/waterBoxSimulator/particle.cpp
+CMakeFiles/pargs.dir/particle.cpp.o: CMakeFiles/pargs.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nora/Projects/waterBoxSimulator/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/pargs.dir/particle.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/pargs.dir/particle.cpp.o -MF CMakeFiles/pargs.dir/particle.cpp.o.d -o CMakeFiles/pargs.dir/particle.cpp.o -c /home/nora/Projects/waterBoxSimulator/particle.cpp
+
+CMakeFiles/pargs.dir/particle.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/pargs.dir/particle.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/nora/Projects/waterBoxSimulator/particle.cpp > CMakeFiles/pargs.dir/particle.cpp.i
+
+CMakeFiles/pargs.dir/particle.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/pargs.dir/particle.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/nora/Projects/waterBoxSimulator/particle.cpp -o CMakeFiles/pargs.dir/particle.cpp.s
 
 # Object files for target pargs
 pargs_OBJECTS = \
-"CMakeFiles/pargs.dir/progargs.cpp.o"
+"CMakeFiles/pargs.dir/progargs.cpp.o" \
+"CMakeFiles/pargs.dir/particle.cpp.o"
 
 # External object files for target pargs
 pargs_EXTERNAL_OBJECTS =
 
 libpargs.a: CMakeFiles/pargs.dir/progargs.cpp.o
+libpargs.a: CMakeFiles/pargs.dir/particle.cpp.o
 libpargs.a: CMakeFiles/pargs.dir/build.make
 libpargs.a: CMakeFiles/pargs.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/nora/Projects/waterBoxSimulator/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX static library libpargs.a"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/nora/Projects/waterBoxSimulator/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX static library libpargs.a"
 	$(CMAKE_COMMAND) -P CMakeFiles/pargs.dir/cmake_clean_target.cmake
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/pargs.dir/link.txt --verbose=$(VERBOSE)
 

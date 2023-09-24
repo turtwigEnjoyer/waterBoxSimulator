@@ -1,16 +1,24 @@
 #pragma once
 
-class particle{
-    private:
-     //Position, hv (?), velocity
-     //Should they be vectors or arrays? They will be accessed together most of the time 
-       float px, py, pz;
+#include <cstdio>
+#include <cstring>
+#include <string>
+#include <cstdlib>
+#include <iostream>
+#include <fstream>
+#include <vector> 
 
-       float vx, vy, vz;
+struct particle{
+  //Position, hv (?), velocity
+  //Should they be vectors or arrays? They will be accessed together most of the time 
+  float px, py, pz;
 
-       float hvx, hvy, hvz;
+  float vx, vy, vz;
 
-    public:
-        particle(float px, float py, float pz, float vx, float vy, float vz, float hvx, float hvy, float hvz){}
-        //void read(ifstream file){}
+  float hvx, hvy, hvz;
+
+  particle(float px, float py, float pz, float vx, float vy, float vz, float hvx, float hvy, float hvz);
+  //void read(ifstream file){}
+
 };
+void printParticle(particle name);

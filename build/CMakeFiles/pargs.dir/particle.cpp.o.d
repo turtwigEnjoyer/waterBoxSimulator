@@ -1,7 +1,6 @@
-CMakeFiles/pargs.dir/progargs.cpp.o: \
- /home/nora/Projects/waterBoxSimulator/progargs.cpp \
+CMakeFiles/pargs.dir/particle.cpp.o: \
+ /home/nora/Projects/waterBoxSimulator/particle.cpp \
  /usr/include/stdc-predef.h \
- /home/nora/Projects/waterBoxSimulator/progargs.hpp \
  /home/nora/Projects/waterBoxSimulator/particle.hpp \
  /usr/include/c++/11/cstdio \
  /usr/include/x86_64-linux-gnu/c++/11/bits/c++config.h \

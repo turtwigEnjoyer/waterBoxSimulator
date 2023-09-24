@@ -8,7 +8,7 @@ set(CMAKE_CXX_EXTENSIONS_OFF)
 
 set(CMAKE_CXX_FLAGS_RELEASE "−march=native")
 
-add_library(pargs progargs.cpp progargs.hpp)
+add_library(pargs progargs.cpp progargs.hpp particle.cpp particle.hpp)
 add_executable(${PROJECT_NAME} fluid.cpp) ## BUILDS IN DEBUG BY DEFAULT!! IMPORTANT LATER
 ##target_link_directories( ${PROJECT_NAME} PRIVATE ${CMAKE_BINARY_DIR})
 target_link_libraries(${PROJECT_NAME} PRIVATE pargs)
