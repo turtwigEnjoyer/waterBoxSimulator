@@ -46,7 +46,7 @@ void pargs::readInput(char* fLocation, input& in){
 		return;
 	} 
 	
-	float p[9];
+	float p[9];  //create an space of 9 to define the body of each particle
 	//Particles are read, intiliased and stored in a vector
 	for (int i = 0; i< pCount; i++){
 		fin.read(reinterpret_cast<char*>(p), 9* sizeof(float));

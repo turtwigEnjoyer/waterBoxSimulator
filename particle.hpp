@@ -18,7 +18,7 @@ struct particle{
   float hvx, hvy, hvz;
 
   //void read(ifstream file){}
-  particle(float* p);
+  particle(float* p); //initialize an array p of particles
 
 };
 struct input{
