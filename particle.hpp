@@ -17,9 +17,14 @@ struct particle{
 
   float hvx, hvy, hvz;
 
-  particle(float px, float py, float pz, float vx, float vy, float vz, float hvx, float hvy, float hvz);
   //void read(ifstream file){}
   particle(float* p);
 
+};
+struct input{
+  int np;
+  float ppm;
+  std::vector<particle> ps;
+/*   input(); */
 };
 void printParticle(particle name);

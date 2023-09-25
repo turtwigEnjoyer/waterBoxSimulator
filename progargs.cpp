@@ -19,34 +19,41 @@ void pargs::writeOutput(ofstream& fout, float ppm, int np, particle* particles, 
 
 	return;
 };
-void pargs::readInput(ifstream& fin, int& anp, float& appm, vector<particle>& particles){
+void pargs::readInput(char* fLocation, input& in){
 
 	//We are first going to read and store Np, and then store an array of particles? 
 	// Is it better to concatenate vectors and then write or a write per particle??
 	// Binary files are float, int , 9 float * number of particles.
-	
-	int np;
-	float ppm;
+
+	ifstream fin;
+
+	fin.open(fLocation, std::ios::binary | std::ios::in);
+	if(!fin){
+		throw (-3);
+		return;
+	}
 	fin.seekg(0, fin.end);
   	size_t fileSize = fin.tellg();
   	fin.seekg(0, fin.beg);
-	const size_t pCount = (fileSize- sizeof(float)- sizeof(int))/(sizeof(float)*9);
+	//Calculates particle count from total file size -header
+	const int pCount = (fileSize- sizeof(float)- sizeof(int))/(sizeof(float)*9);
 
-	fin.read(reinterpret_cast<char*>(&ppm),sizeof(float));
-	fin.read(reinterpret_cast<char*>(&np), sizeof(int));
+	fin.read(reinterpret_cast<char*>(&in.ppm),sizeof(float));
+	fin.read(reinterpret_cast<char*>(&in.np), sizeof(int));
+	
+	if (in.np != pCount){
+		throw "Error: Number of particles mismatch. Header: "+ to_string(in.np)+ ", Found: " + to_string(pCount);
+		return;
+	} 
 	
 	float p[9];
+	//Particles are read, intiliased and stored in a vector
 	for (int i = 0; i< pCount; i++){
 		fin.read(reinterpret_cast<char*>(p), 9* sizeof(float));
-		particles.push_back(particle(p));
+		in.ps.push_back(particle(p));
 	}
-
-	//fin.read(reinterpret_cast<char*>(ps), count*sizeof(particle));
-	cout << np << endl;
-	cout << ppm << endl;
-	
 }
-int pargs::checkParams(int argc, char** argv) {
+int pargs::checkParams(int argc, char** argv, input& in) {
 	if (argc != 4) {
 		cout << "Error: Invalid number of arguments: "<< argc-1 << "\n";
 		return -1;
@@ -59,25 +66,22 @@ int pargs::checkParams(int argc, char** argv) {
 		cout << "Error: Invalid number of time steps.\n";
 		return -2;
 	}
-
-	int np = atoi(argv[1]);
-	ifstream fin;
-	ofstream fout(argv[3], ios::binary);
-
-	
-	/* if (!fin) {
-		cout <<"Error: Cannot open init.fld for reading\n";
+	// Input file
+	try{
+		readInput(argv[2], in);
+	}catch( const char* headerMismatch){
+		cout << headerMismatch << endl;
+		return -5;
+	}catch( int fileUnreachable){
+		cout << "Error: Cannot open init.fld for reading\n";
 		return -3;
-	} */
-/* 	fout.open("./IO/output.txt", ios::out | ios::binary);
+	}
+	ofstream fout;
+	fout.open(argv[3], std::ios::binary | std::ios::out);
 	if(!fout){
-		cout << "Error: Cannot open final.fld for writing\n";
+		cout << "Error: Cannot open " << argv[3] << " for writing\n";
 		return -4;
 	}
-	else writeOutput( fout, 10.f, 10, {});
-	fout.close();
- */
-	// Check input file
 	return 1;
 
 }

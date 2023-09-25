@@ -2,19 +2,6 @@
 #include <iostream>
 
 
-particle::particle(float px, float py, float pz, float vx, float vy, float vz, float hvx, float hvy, float hvz){
-    this->px = px;
-    this->py = py;
-    this->pz = pz;
-
-    this->vx = vx;
-    this->vy = vy;
-    this->vz = vz;
-
-    this->hvx = hvx;
-    this->hvy = hvy;
-    this->hvz = hvz;
-}
 particle::particle(float* p){
     this->px = p[0];
     this->py = p[1];
@@ -27,7 +14,8 @@ particle::particle(float* p){
     this->hvx = p[6];
     this->hvy = p[7];
     this->hvz = p[8];
-}   
+}
+/* s */ 
 void printParticle(particle name){
     std::cout << "px, py, pz: (" << name.px << name.py << name.pz << ")\n";
 }
