@@ -1,7 +1,10 @@
+/* DEADLINE OCTOBER 30TH !!  */
+
 
 #include "progargs.hpp"
 
 using namespace std;
+
 
 int main(int argc, char** argv)
 {
@@ -10,6 +13,7 @@ int main(int argc, char** argv)
 	
 	particle a(1,1,1,2,2,2,3,3,3);
 	particle ps[] = {a,a,a};
+	vector<particle> Input = {};
 	int np;
 	float ppm;
 
@@ -20,8 +24,11 @@ int main(int argc, char** argv)
 	fout.close(); 
 
  	ifstream fin;
-	fin.open("../fout.bin", ios::binary | ios::in);
-	pargs::readInput(fin, np, ppm, ps);
+	fin.open("../small.fld", ios::binary | ios::in);
+	pargs::readInput(fin, np, ppm, Input);
+	for( auto it = Input.begin(); it != Input.end(); it++){
+		printParticle(*it);
+	}
 	fin.close();
 
 /* 	fin.seekg(0, fin.end);

@@ -19,21 +19,29 @@ void pargs::writeOutput(ofstream& fout, float ppm, int np, particle* particles, 
 
 	return;
 };
-void pargs::readInput(ifstream& fin, int& anp, float& appm, particle* ps){
+void pargs::readInput(ifstream& fin, int& anp, float& appm, vector<particle>& particles){
 
 	//We are first going to read and store Np, and then store an array of particles? 
 	// Is it better to concatenate vectors and then write or a write per particle??
+	// Binary files are float, int , 9 float * number of particles.
+	
 	int np;
 	float ppm;
 	fin.seekg(0, fin.end);
   	size_t fileSize = fin.tellg();
   	fin.seekg(0, fin.beg);
-	const size_t count = (fileSize- sizeof(float)- sizeof(int))/sizeof(particle);
+	const size_t pCount = (fileSize- sizeof(float)- sizeof(int))/(sizeof(float)*9);
 
 	fin.read(reinterpret_cast<char*>(&ppm),sizeof(float));
 	fin.read(reinterpret_cast<char*>(&np), sizeof(int));
+	
+	float p[9];
+	for (int i = 0; i< pCount; i++){
+		fin.read(reinterpret_cast<char*>(p), 9* sizeof(float));
+		particles.push_back(particle(p));
+	}
 
-	fin.read(reinterpret_cast<char*>(ps), count*sizeof(particle));
+	//fin.read(reinterpret_cast<char*>(ps), count*sizeof(particle));
 	cout << np << endl;
 	cout << ppm << endl;
 	

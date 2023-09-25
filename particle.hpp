@@ -19,6 +19,7 @@ struct particle{
 
   particle(float px, float py, float pz, float vx, float vy, float vz, float hvx, float hvy, float hvz);
   //void read(ifstream file){}
+  particle(float* p);
 
 };
 void printParticle(particle name);
