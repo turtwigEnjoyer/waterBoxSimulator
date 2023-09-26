@@ -1,4 +1,0 @@
-/home/nora/Projects/waterBoxSimulator/build/CMakeFiles/pargs.dir
-/home/nora/Projects/waterBoxSimulator/build/CMakeFiles/fluid.dir
-/home/nora/Projects/waterBoxSimulator/build/CMakeFiles/edit_cache.dir
-/home/nora/Projects/waterBoxSimulator/build/CMakeFiles/rebuild_cache.dir

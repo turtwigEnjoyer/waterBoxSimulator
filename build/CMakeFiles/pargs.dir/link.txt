@@ -1,2 +1,0 @@
-/usr/bin/ar qc libpargs.a CMakeFiles/pargs.dir/progargs.cpp.o CMakeFiles/pargs.dir/particle.cpp.o
-/usr/bin/ranlib libpargs.a
