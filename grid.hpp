@@ -10,9 +10,13 @@ class grid{
         static const float DAMPING =128.0, VISCOSITY = 0.4, P_SIZE = 2*10^-4, T_STEP = 10^-3;
         static const float YMAX= 0.1, YMIN= -0.08, XMAX = 0.065, XMIN= -0.065, ZMAX = 0.065, ZMIN= -0.065;
 
-        static float h;
+        static float h, m;
         static float sx,sy,sz;        
         static int nx, ny, nz;
+
+        //These will remain constant during the whole program and should be computed once instead of every it
+        static float H2, H6;
+        static float PI_DIV15, PI_DIV45, PI_DIV315;
 
         //Should contain some data structure of blocks inside of it ? block[] blocks? maybe 3d?( bad idea i think)
         //Using a pseudo binary base nx,ny nz

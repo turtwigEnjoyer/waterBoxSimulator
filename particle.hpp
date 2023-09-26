@@ -11,6 +11,8 @@
 struct particle{
   //Position, hv (?), velocity
   //Should they be vectors or arrays? They will be accessed together most of the time 
+  int id;
+  float ax,ay,az;
   float px, py, pz;
 
   float vx, vy, vz;
