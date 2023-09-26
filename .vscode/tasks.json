@@ -1,18 +1,20 @@
 {
     "tasks": [
         {
-            "type": "cppbuild",
-            "label": "C/C++: g++-11 build active file",
-            "command": "/usr/bin/g++-11",
-            "args": [
-                "-fdiagnostics-color=always",
+            "type": "shell",
+            "label": "Construir proyecto",
+            "command": "make",
+/*            "args": [
+                "-n"
+            ],*/
+/*            ,
                 "-g",
-                "${file}",
+                "${file}", 
                 "-o",
                 "${fileDirname}/${fileBasenameNoExtension}"
-            ],
+            ],*/
             "options": {
-                "cwd": "${fileDirname}"
+                "cwd": "${workspaceFolder}/build"
             },
             "problemMatcher": [
                 "$gcc"

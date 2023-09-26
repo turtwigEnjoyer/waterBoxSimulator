@@ -2,7 +2,3 @@
 /home/nora/Projects/waterBoxSimulator/build/CMakeFiles/fluid.dir
 /home/nora/Projects/waterBoxSimulator/build/CMakeFiles/edit_cache.dir
 /home/nora/Projects/waterBoxSimulator/build/CMakeFiles/rebuild_cache.dir
-/home/nora/Projects/waterBoxSimulator/build/CMakeFiles/list_install_components.dir
-/home/nora/Projects/waterBoxSimulator/build/CMakeFiles/install.dir
-/home/nora/Projects/waterBoxSimulator/build/CMakeFiles/install/local.dir
-/home/nora/Projects/waterBoxSimulator/build/CMakeFiles/install/strip.dir

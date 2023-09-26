@@ -11,6 +11,7 @@
         Ap = (h^2 - mod^2)^3
         apply Ap to both
 
+
         Density lin transform
         pi = (pi +h^6)* 21/64* (15* m/(pi* h^9))
 
