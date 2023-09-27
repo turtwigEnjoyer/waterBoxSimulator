@@ -1,9 +1,9 @@
-#include "progargs.hpp"
+#include "progargs.h"
 
 using namespace std;
 
 bool isNumber(const char* str){
-	for(int i=0; i< strlen( str ); i++){
+	for(size_t i=0; i< strlen( str ); i++){
 		if(!isdigit(str[i])){
 			return false;
 		}
@@ -19,15 +19,15 @@ void pargs::writeOutput(ofstream& fout, float ppm, int np, particle* particles, 
 
 	return;
 };
-void pargs::readInput(char* fLocation, input& in){
+void pargs::readInput(char* filename, grid& singletonGrid){
 
 	//We are first going to read and store Np, and then store an array of particles? 
 	// Is it better to concatenate vectors and then write or a write per particle??
 	// Binary files are float, int , 9 float * number of particles.
-
+	int np;
 	ifstream fin;
 
-	fin.open(fLocation, std::ios::binary | std::ios::in);
+	fin.open(filename, std::ios::binary | std::ios::in);
 	if(!fin){
 		throw (-3);
 		return;
@@ -35,25 +35,19 @@ void pargs::readInput(char* fLocation, input& in){
 	fin.seekg(0, fin.end);
   	size_t fileSize = fin.tellg();
   	fin.seekg(0, fin.beg);
+	
 	//Calculates particle count from total file size -header
 	const int pCount = (fileSize- sizeof(float)- sizeof(int))/(sizeof(float)*9);
-
-	fin.read(reinterpret_cast<char*>(&in.ppm),sizeof(float));
-	fin.read(reinterpret_cast<char*>(&in.np), sizeof(int));
-	
-	if (in.np != pCount){
-		throw "Error: Number of particles mismatch. Header: "+ to_string(in.np)+ ", Found: " + to_string(pCount);
+	singletonGrid.Load(fin); // reads ppm
+	fin.read(reinterpret_cast<char*>(&np), sizeof(int));
+    if (np != pCount){
+		throw "Error: Number of particles mismatch. Header: "+ to_string(np)+ ", Found: " + to_string(pCount);
 		return;
 	} 
-	
-	float p[9];  //create an space of 9 to define the body of each particle
-	//Particles are read, intiliased and stored in a vector
-	for (int i = 0; i< pCount; i++){
-		fin.read(reinterpret_cast<char*>(p), 9* sizeof(float));
-		in.ps.push_back(particle(p));
-	}
+	//We have to initialize grid first
+    particle::Sload(fin, pCount);
 }
-int pargs::checkParams(int argc, char** argv, input& in) {
+int pargs::checkParams(int argc, char** argv, grid& pSingelton) {
 	if (argc != 4) {
 		cout << "Error: Invalid number of arguments: "<< argc-1 << "\n";
 		return -1;
@@ -68,7 +62,7 @@ int pargs::checkParams(int argc, char** argv, input& in) {
 	}
 	// Input file
 	try{
-		readInput(argv[2], in);
+		readInput(argv[2], pSingelton);
 	}catch( const char* headerMismatch){
 		cout << headerMismatch << endl;
 		return -5;
