@@ -21,3 +21,11 @@
         Collisions with bounds
     4.34 all particles updated
 */   
+//Storing vectors with pointers might be bad bc particles are far in memory --> will have a lot of misses
+//Don't use raw pointers particle* p;
+//Clang-format contains specification on look and feel of code
+//  Rules on Code :( --> formats your code with proper look and feel
+//Clang-tidy contains a lot of static checks
+    //Contains rules too. Maximum complexity of function, not too many variables passed...
+    //Guarantee code will be readable
+//I

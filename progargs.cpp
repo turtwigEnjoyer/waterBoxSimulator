@@ -48,10 +48,12 @@ void pargs::readInput(char* filename, grid& singletonGrid){
     particle::Sload(fin, pCount);
 }
 int pargs::checkParams(int argc, char** argv, grid& pSingelton) {
-	if (argc != 4) {
+/* 	if (argc != 4) {
 		cout << "Error: Invalid number of arguments: "<< argc-1 << "\n";
 		return -1;
-	}
+ 	} */
+	argc=3; //remode when done debugging
+/*
 	if (!isNumber(argv[1])){
 		cout << "Error: time steps must be numeric.\n";
 		return -1;
@@ -59,10 +61,11 @@ int pargs::checkParams(int argc, char** argv, grid& pSingelton) {
 	if (argv[1][0]=='-'){
 		cout << "Error: Invalid number of time steps.\n";
 		return -2;
-	}
+	} */
 	// Input file
 	try{
 		readInput(argv[2], pSingelton);
+		//readInput(argv[2], pSingelton);
 	}catch( const char* headerMismatch){
 		cout << headerMismatch << endl;
 		return -5;
@@ -71,11 +74,11 @@ int pargs::checkParams(int argc, char** argv, grid& pSingelton) {
 		return -3;
 	}
 	ofstream fout;
-	fout.open(argv[3], std::ios::binary | std::ios::out);
+/* 	fout.open(argv[3], std::ios::binary | std::ios::out);
 	if(!fout){
 		cout << "Error: Cannot open " << argv[3] << " for writing\n";
 		return -4;
-	}
+	} */
 	return 1;
 
 }
