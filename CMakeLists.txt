@@ -11,9 +11,9 @@ add_compile_options(-Wall -Wextra -Werror -pedantic -pedantic-errors -ggdb  -g)
 
 set(CMAKE_CXX_FLAGS_RELEASE "−march=native")
 ##
-add_library(lib1 progargs.cpp particle.cpp grid.cpp block.cpp)
-add_executable(${PROJECT_NAME} fluid.cpp)
-target_link_libraries(${PROJECT_NAME} PRIVATE lib1)
+add_library(sim progargs.cpp particle.cpp grid.cpp block.cpp)
+add_executable(${PROJECT_NAME} fluid.cpp)##esto es para ejecutar el unitest 
+target_link_libraries(${PROJECT_NAME} PRIVATE sim)
 ##target_link_directories( ${PROJECT_NAME} PRIVATE ${CMAKE_BINARY_DIR})
 #install(TARGETS ${PROJECT_NAME} DESTINATION bin)
 
