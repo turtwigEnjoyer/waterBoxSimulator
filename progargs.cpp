@@ -48,12 +48,12 @@ void pargs::readInput(char* filename, grid& singletonGrid){
     particle::Sload(fin, pCount);
 }
 int pargs::checkParams(int argc, char** argv, grid& pSingelton) {
-/* 	if (argc != 4) {
+ 	if (argc != 4) {
 		cout << "Error: Invalid number of arguments: "<< argc-1 << "\n";
 		return -1;
- 	} */
+ 	}
 	argc=3; //remode when done debugging
-/*
+
 	if (!isNumber(argv[1])){
 		cout << "Error: time steps must be numeric.\n";
 		return -1;
@@ -61,7 +61,7 @@ int pargs::checkParams(int argc, char** argv, grid& pSingelton) {
 	if (argv[1][0]=='-'){
 		cout << "Error: Invalid number of time steps.\n";
 		return -2;
-	} */
+	}
 	// Input file
 	try{
 		readInput(argv[2], pSingelton);

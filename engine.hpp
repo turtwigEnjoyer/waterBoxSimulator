@@ -28,4 +28,5 @@
 //Clang-tidy contains a lot of static checks
     //Contains rules too. Maximum complexity of function, not too many variables passed...
     //Guarantee code will be readable
-//I
+//No Macros :(
+    
