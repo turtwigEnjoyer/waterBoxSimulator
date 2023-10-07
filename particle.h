@@ -24,7 +24,7 @@ class particle{
 
     particle(float initArray[]);    
 
-  public:
+  public://no entiendo la definición que has hecho aqui...
 
     virtual ~particle();
     void MoveTo(float x, float y, float z);
