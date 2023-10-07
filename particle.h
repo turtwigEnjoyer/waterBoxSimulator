@@ -39,6 +39,7 @@ class particle{
     TPrecisionInfo GetDensity() const;
     void AddDensity(TPrecisionInfo increase);
     void ClearDensity();
+    void DensityTransformation();
 
     void Reposition();
     void CalculateDistance(PParticle& other);

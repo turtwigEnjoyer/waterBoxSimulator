@@ -70,3 +70,8 @@ void block::ClearDistances(){
         i.ClearDensity();
     }
 }
+void block::DensityTransformations(){
+    for(auto i: particles){
+        i.DensityTransformation();
+    }
+}

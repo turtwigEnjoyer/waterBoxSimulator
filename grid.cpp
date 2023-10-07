@@ -140,3 +140,8 @@ void grid::ClearDistances(){
         i.ClearDistances();
     }
 }
+void grid::DensityTransformations(){
+    for(auto i: blocks){
+        i.DensityTransformations();
+    }
+}

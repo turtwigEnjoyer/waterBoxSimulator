@@ -17,4 +17,5 @@ class block{
         void CalculateDistances(block& other);
         void CalculateSelfDistances();
         void ClearDistances();
+        void DensityTransformations();
 };
