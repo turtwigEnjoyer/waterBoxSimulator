@@ -33,6 +33,7 @@ class grid{
         int PutInBlock(ParticlePos pos); 
         void calculateDistances();
         void ClearDistances();
+        void DensityTransformations();
         //std::move is more useful
 /*         void Move(particle::PParticle pParticula, TBlockIndex indiceOrigen, TBlockIndex indiceDestin); */
         TBlockIndex BlockIndex(vector<TPrecisionInfo> positions);

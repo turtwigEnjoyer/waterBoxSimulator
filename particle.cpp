@@ -5,6 +5,10 @@ particle::TId particle::lastId=0;
 int particle::sParticles=0;
 
 particle::particle(float p[]){
+    px= p[0];
+    py = p[1];
+    pz = p[2];
+
     vx = p[3];
     vy = p[4];
     vz = p[5];
@@ -76,6 +80,9 @@ TPrecisionInfo particle::DensityIncrease( TPrecisionInfo distance){
         return ( pow(GRID.H2-distance,3));
     }
     return 0;
+}
+void particle::DensityTransformation(){
+    density = (density +GRID.H6)*GRID.PI_DIV315;
 }
 
 //Getters and Setters
