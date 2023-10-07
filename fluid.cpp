@@ -15,13 +15,15 @@ int main(int argc, char** argv)
 	int out= pargs::checkParams(argc, argv, singletonGrid);
 	if(out<0) return out;
 
-	int timeSteps=10000;
-
+	int timeSteps=500;
+	//1000 takes 815 seconds
+	//100 takes 8 seconds --> makes no sense?
 	auto start = chrono::high_resolution_clock::now();
 
 	for(int i=0;i<timeSteps;i++)
 	{
-		//singletonGrid.CalculateDistances();
+		singletonGrid.ClearDistances();
+		singletonGrid.calculateDistances();
 	} 
 	auto stop = chrono::high_resolution_clock::now();
 	auto duration = chrono::duration_cast<chrono::microseconds>(stop - start);

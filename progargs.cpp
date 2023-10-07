@@ -46,9 +46,9 @@ void pargs::readInput(char* filename, grid& singletonGrid){
 		throw "Error: Number of particles mismatch. Header: "+ to_string(np)+ ", Found: " + to_string(pCount);
 		return;
 	} 
-	//We have to initialize grid first
     particle::Sload(fin, pCount);
 }
+
 int pargs::checkParams(int argc, char** argv, grid& pSingelton) {
  	if (argc != 4) {
 		cout << "Error: Invalid number of arguments: "<< argc-1 << "\n";

@@ -30,22 +30,24 @@ class grid{
         virtual ~grid();
         
         void Load(ifstream& pFile);
-        TBlockIndex PutInBlock(particle::PParticle p);
+        void PutInBlock(particle::PParticle p, int whichBlock);
+        int PutInBlock(ParticlePos pos); 
         void calculateDistances();
+        void ClearDistances();
         //std::move is more useful
 /*         void Move(particle::PParticle pParticula, TBlockIndex indiceOrigen, TBlockIndex indiceDestin); */
-        TBlockIndex BlockIndex(TPrecisionInfo x, TPrecisionInfo y, TPrecisionInfo z);
+        TBlockIndex BlockIndex(vector<TPrecisionInfo> positions);
         /* void determineBlock(particle p);
         void repositionParticles(); //4.3.1 Repositioning Particles    
         */
     private:
         void FillAdjacents();
-        int WhichDirections(size_t index);
-        void chooseDirections(int choose, int index);
-        void XYZdir(int index);
-        void XYdir(int index);
-        void XZdir(int index);
-        void YZdir(int index);
+        int WhichDirections(int index);
+        void chooseDirections(int choose, size_t index);
+        void XYZdir(size_t index);
+        void XYdir(size_t index);
+        void XZdir(size_t index);
+        void YZdir(size_t index);
 };
 
 #define GRID (*grid::pSingleton)

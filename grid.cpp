@@ -33,12 +33,12 @@ void grid::Load(ifstream& fin){
     PI_DIV45 = 3* PI_DIV15* (float)VISCOSITY *m;
 
 }
-TBlockIndex grid::PutInBlock(particle::PParticle pParticle){
-    //This operation is going to happen a lot. Can we find a way to do it less?
-    int index=BlockIndex(pParticle.GetX(),
-                        pParticle.GetY(),
-                        pParticle.GetZ());
-    blocks[index].PushBack(pParticle);
+void grid::PutInBlock(particle::PParticle particle, int whichBlock){
+    blocks[whichBlock].PushBack(particle);
+}
+int grid::PutInBlock(ParticlePos pos){
+    int index=BlockIndex(pos.position);
+    blocks[index].PushBack(pos);
     return index;
 }
 /* void grid::Move(particle::PParticle pParticula, TBlockIndex indiceOrigen, TBlockIndex indiceDestino)
@@ -52,10 +52,10 @@ int Range(int x,int min,int max)
     //If x<0 ret 0, x>max ret max, else return x
     return (((x)<(min))?(min):(((x)>(max))?(max):(x)));
 }
-TBlockIndex grid::BlockIndex(TPrecisionInfo x, TPrecisionInfo y, TPrecisionInfo z){
-    int ix=Range((x-XMIN)/sx,0,nx-1);
-    int iy=Range((y-YMIN)/sy,0,ny-1);
-    int iz=Range((z-ZMIN)/sz,0,nz-1);
+TBlockIndex grid::BlockIndex(vector<TPrecisionInfo> positions){
+    int ix=Range((positions[0]-XMIN)/sx,0,nx-1);
+    int iy=Range((positions[1]-YMIN)/sy,0,ny-1);
+    int iz=Range((positions[2]-ZMIN)/sz,0,nz-1);
 
     return ix+iy*nx+iz*(nx*ny);
 }
@@ -63,11 +63,11 @@ TBlockIndex grid::BlockIndex(TPrecisionInfo x, TPrecisionInfo y, TPrecisionInfo 
 void grid::calculateDistances(){
 
     for(size_t index=0; index< blocks.size(); index++){
-        //chooseDirections(WhichDirections(index));
-        
+        blocks[index].CalculateSelfDistances();
+        chooseDirections( WhichDirections( static_cast<int>(index) ), index);
     }
 }
-int grid::WhichDirections(size_t index){
+int grid::WhichDirections(int index){
     bool xDir, yDir, zDir;
     /* We will treat every block as a corner, any block having to do at most 7 operations with its neighbors.
     We will calculate with the block on the xDirection if our x position is not an edge
@@ -85,7 +85,7 @@ int grid::WhichDirections(size_t index){
 
     return 4*zDir+2*yDir+1*xDir;
 }
-void grid::chooseDirections(int choose, int index){
+void grid::chooseDirections(int choose, size_t index){
     switch(choose){
         case(7):
             XYZdir(index);
@@ -111,7 +111,7 @@ void grid::chooseDirections(int choose, int index){
         //Case 0 We do nothing
     }
 }
-void grid::XYZdir(int index){
+void grid::XYZdir(size_t index){
     blocks[index].CalculateDistances(blocks[index+1]); //XDir
     blocks[index].CalculateDistances(blocks[index+nx]);//YDir
     blocks[index].CalculateDistances(blocks[index+nx+1]); //XYDir
@@ -120,18 +120,23 @@ void grid::XYZdir(int index){
     blocks[index].CalculateDistances(blocks[index+nx*ny+nx]); //ZYDir
     blocks[index].CalculateDistances(blocks[index+nx*ny+nx+1]); //ZXY Dir
 }
-void grid::XYdir(int index){
+void grid::XYdir(size_t index){
     blocks[index].CalculateDistances(blocks[index+1]); //XDir
     blocks[index].CalculateDistances(blocks[index+nx]);//YDir
     blocks[index].CalculateDistances(blocks[index+nx+1]); //XYDir
 }
-void grid::XZdir(int index){
+void grid::XZdir(size_t index){
     blocks[index].CalculateDistances(blocks[index+1]); //XDir
     blocks[index].CalculateDistances(blocks[index+nx*ny]); //ZDir
     blocks[index].CalculateDistances(blocks[index+nx*ny+1]); //ZXDir
 }
-void grid::YZdir(int index){
+void grid::YZdir(size_t index){
     blocks[index].CalculateDistances(blocks[index+nx]);//YDir
     blocks[index].CalculateDistances(blocks[index+nx*ny]); //ZDir
     blocks[index].CalculateDistances(blocks[index+nx*ny+nx]); //ZYDir
+}
+void grid::ClearDistances(){
+    for(auto i : blocks){
+        i.ClearDistances();
+    }
 }
