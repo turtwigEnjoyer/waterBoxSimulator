@@ -5,15 +5,12 @@ using namespace std;
 
 class block{
 
-    list<particle::PParticle> content;
-    list<TBlockIndex> adyacents;
-    public:
+        vector<particle::PParticle> content;  
+        public:
         block();
         virtual ~block();
 
-        void PutIn(particle::PParticle pParticula);
-        void PutOut(particle::PParticle pParticula);
-
-        void AddAdjacents(TBlockIndex index);
-        void CalculateDistances();
+        //Std::move() is much more useful/
+        void PushBack(particle::PParticle p);
+        void CalculateDistances(block& other);
 };

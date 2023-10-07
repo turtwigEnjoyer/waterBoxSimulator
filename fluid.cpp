@@ -9,6 +9,9 @@ using namespace std;
 int main(int argc, char** argv)
 {
 	grid singletonGrid;
+
+	//This will initialize each particle
+	// Particles for now are stored in a class static array
 	int out= pargs::checkParams(argc, argv, singletonGrid);
 	if(out<0) return out;
 
@@ -18,8 +21,8 @@ int main(int argc, char** argv)
 
 	for(int i=0;i<timeSteps;i++)
 	{
-		singletonGrid.CalculateDistances();
-	}
+		//singletonGrid.CalculateDistances();
+	} 
 	auto stop = chrono::high_resolution_clock::now();
 	auto duration = chrono::duration_cast<chrono::microseconds>(stop - start);
 

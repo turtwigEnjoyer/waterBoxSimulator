@@ -10,31 +10,19 @@ block::~block()
 
 }
 
-void block::PutIn(particle::PParticle pParticle)
+void block::PushBack(particle::PParticle pParticle)
 {
     content.push_back(pParticle);
 }
 
-void block::PutOut(particle::PParticle pParticle)
+/* void block::PutOut(particle::PParticle pParticle)
 {
     content.erase(find(content.begin(),content.end(),pParticle));
-}
-
-void block::AddAdjacents(TBlockIndex indice) 
-{
-    //figure out how to spell adyacent
-    adyacents.push_back(indice);
-}
-
-void block::CalculateDistances()
-{
-    for(auto it=content.begin();it!=content.end();it++)
-    {
-        auto jt=it;
-        jt++;
-        for(;jt!=content.end();jt++)
-        {
-            GET_PARTICLE(*it)->CalculateDistance(GET_PARTICLE(*jt));
+} */
+void block::CalculateDistances(block& other){
+    for(auto it= content.begin();it!=content.end();it++){
+        for(auto jt=other.content.begin();jt!=other.content.end();jt++){
+            
         }
     }
 }

@@ -3,10 +3,8 @@
 
 particle::TId particle::lastId=0;
 int particle::sParticles=0;
-vector<particle> particle::particles;
 
-
-particle::particle(float* p){
+particle::particle(float p[]){
     px = p[0];
     py = p[1];
     pz = p[2];
@@ -21,11 +19,7 @@ particle::particle(float* p){
 
     id=lastId;
     lastId++;
-    #ifdef PARTICULA_POR_IDENTIFICADOR
-        blockIndex=GRID.putInBlock(id);
-    #else
-        blockIndex=GRID.PutInBlock(this);
-    #endif 
+
 }
 particle::~particle(){
     
@@ -36,11 +30,11 @@ void particle::Sload(ifstream& fin, int pCount){
 	//Particles are read, intiliased and stored in a vector
 	for (int i = 0; i< pCount; i++){
 		fin.read(reinterpret_cast<char*>(p), 9* sizeof(float));
-        particles.push_back(particle(p)); //Constructor already adds to our Data Structure on Grid and Block
+        GRID.PutInBlock(particle(p)); 
 	}
 
 }
-void particle::MoveTo(TPrecisionInfo x, TPrecisionInfo y, TPrecisionInfo z)
+/* void particle::MoveTo(TPrecisionInfo x, TPrecisionInfo y, TPrecisionInfo z)
 {
     TBlockIndex newIndex=GRID.BlockIndex(x,y,z);
     px=x;
@@ -55,7 +49,7 @@ void particle::MoveTo(TPrecisionInfo x, TPrecisionInfo y, TPrecisionInfo z)
 #endif
         blockIndex=newIndex;
     }
-}
+} */
 
 void particle::Reposition()
 {
@@ -70,13 +64,13 @@ void particle::CalculateDistance(particle* pOperando)
     distances.push_back(d);
     pOperando->distances.push_back(d);
 }
-void particle::CleanDistances()
+/* void particle::CleanDistances()
 {
     for(auto it=particles.begin();it!=particles.end();it++)
     {
         it->distances.clear();
     }
-}
+} */
 
 
 //Getters and Setters

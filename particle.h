@@ -1,23 +1,20 @@
 #pragma once
 #include "Dependencies.h"
-//#define PARTICULA_POR_IDENTIFICADOR
+
 class particle{
   public:
     typedef int TId; //We are using int now, but might need bigger
-    #ifdef PARTICULA_POR_IDENTIFICADOR
-    typedef size_t PParticle;
-    #else
-    typedef particle* PParticle;
-    #endif
+    typedef particle PParticle;
+
     
-    static vector<particle> particles;
+    //static vector<particle> particles; Not needed any more
 
   private:
     static TId lastId;
     static int sParticles;
 
     int id;
-    TBlockIndex blockIndex; //Is it really useful?
+    //TBlockIndex blockIndex; //Is it really useful?
     //Should they be vectors or arrays? They will be accessed together most of the time
     TPrecisionInfo ax,ay,az;
     TPrecisionInfo px,py,pz;
@@ -26,7 +23,7 @@ class particle{
 
     vector<TPrecisionInfo> distances;
 
-    particle(float* initArray);
+    particle(float initArray[]);
   public:
     virtual ~particle();
     void MoveTo(float x, float y, float z);

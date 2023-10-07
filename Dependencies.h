@@ -9,6 +9,7 @@
 #include <list>
 #include <algorithm>
 #include <cmath>
+#include <memory>
 #include <chrono>
 
 using namespace std;
