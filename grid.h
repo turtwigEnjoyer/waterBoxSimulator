@@ -14,9 +14,6 @@ class grid{
         int nx, ny, nz; //Number of blocks
 
         //These will remain constant during the whole program and should be computed once instead of every iteration
-        TPrecisionInfo H2, H6;
-        TPrecisionInfo PI_DIV15, PI_DIV45, PI_DIV315;
-
         //Should contain some data structure of blocks inside of it ? block[] blocks? maybe 3d?( bad idea i think)
         //Using a pseudo binary base nx,ny nz
         //Vector index is determined by bnX + nx*bnY +nx*ny*bnZ whre bnI is blockNumber for Ith coordinate
@@ -24,6 +21,8 @@ class grid{
     
     public:
         static grid* pSingleton;
+        TPrecisionInfo H2, H6;
+        TPrecisionInfo PI_DIV15, PI_DIV45, PI_DIV315;
     //Should assign particles to their respective blocks
     public:
         grid();

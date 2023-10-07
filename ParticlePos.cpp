@@ -11,6 +11,7 @@ ParticlePos::~ParticlePos(){
 void ParticlePos::setOwner(int ownerId){
     this->ownerId=ownerId;
 }
+ 
 TPrecisionInfo ParticlePos::CalculateDistance(ParticlePos& other){
     TPrecisionInfo distance=pow(position[0]-other.position[0],2)+pow(position[1]-other.position[1],2)+pow(position[2]-other.position[2],2);
     return distance;

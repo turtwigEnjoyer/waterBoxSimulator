@@ -20,6 +20,7 @@ class particle{
     TPrecisionInfo px,py,pz;
     TPrecisionInfo vx,vy,vz;
     TPrecisionInfo hvx,hvy,hvz;
+    TPrecisionInfo density;
 
     particle(float initArray[]);    
 
@@ -35,9 +36,13 @@ class particle{
     TPrecisionInfo GetX() const;
     TPrecisionInfo GetY() const;
     TPrecisionInfo GetZ() const;
+    TPrecisionInfo GetDensity() const;
+    void AddDensity(TPrecisionInfo increase);
+    void ClearDensity();
 
     void Reposition();
-    void CalculateDistance(ParticlePos& other);
+    void CalculateDistance(PParticle& other);
+    TPrecisionInfo DensityIncrease(TPrecisionInfo distance);
   private:
     void MoveTo(TPrecisionInfo x, TPrecisionInfo y, TPrecisionInfo z);
     void PutInCaja();

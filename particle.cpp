@@ -55,19 +55,28 @@ void particle::Sload(ifstream& fin, int pCount){
     az=INIT_GZ;
 }
  */
-/* void particle::CalculateDistance(ParticlePos& other)
+void particle::CalculateDistance(PParticle& other)
 {
-    TPrecisionInfo distance=pow(px-other.position[0],2)+pow(py-other.position[1],2)+pow(pz-other.positon[2],2);
+    TPrecisionInfo distance=pow(px-other.GetX(),2)+pow(py-other.GetY(),2)+pow(pz-other.GetZ(),2);
     distances.push_back(distance);
     other.distances.push_back(distance);
-} */
+    TPrecisionInfo increase = DensityIncrease(distance);
+    AddDensity(increase);
+    other.AddDensity(increase);
+
+}
 
 
 void particle::ClearDistances()
 {
     distances.clear();
 }
-
+TPrecisionInfo particle::DensityIncrease( TPrecisionInfo distance){
+    if( distance < GRID.H2){
+        return ( pow(GRID.H2-distance,3));
+    }
+    return 0;
+}
 
 //Getters and Setters
 TPrecisionInfo particle::GetX() const{
@@ -81,4 +90,13 @@ TPrecisionInfo particle::GetZ() const{
 }
 particle::TId particle::GetId() const{
     return id;
+}
+TPrecisionInfo particle::GetDensity() const{
+    return density;
+}
+void particle::AddDensity(TPrecisionInfo increase){
+    density= density +increase;
+}
+void particle::ClearDensity(){
+    density= 0;
 }
