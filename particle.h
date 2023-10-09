@@ -13,6 +13,13 @@ class particle{
     static TId lastId;
     static int sParticles;
 
+
+    const static TPrecisionInfo STIFF_PRESS =3.0;
+    const static TPrecisionInfo STIFF_COLL =30000.0;
+    const static TPrecisionInfo DAMPING =128.0;
+    const static TPrecisionInfo P_SIZE =0.0002;
+    const static TPrecisionInfo T_STEP =1000.0;
+
     int id;
     //TBlockIndex blockIndex; //Is it really useful?
     //Should they be vectors or arrays? They will be accessed together most of the time
@@ -22,7 +29,8 @@ class particle{
     TPrecisionInfo hvx,hvy,hvz;
     TPrecisionInfo density;
 
-    particle(float initArray[]);    
+    particle(float initArray[]);
+    particle(float x, float y, float z); //for tests   
 
   public:
 
