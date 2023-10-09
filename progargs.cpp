@@ -54,14 +54,15 @@ int pargs::checkParams(int argc, char** argv, grid& pSingelton) {
 		cout << "Error: Invalid number of arguments: "<< argc-1 << "\n";
 		return -1;
  	}
-	if (!isNumber(argv[1])){
-		cout << "Error: time steps must be numeric.\n";
-		return -1;
-	}
 	if (argv[1][0]=='-'){
 		cout << "Error: Invalid number of time steps.\n";
 		return -2;
 	}
+	if (!isNumber(argv[1])){
+		cout << "Error: time steps must be numeric.\n";
+		return -1;
+	}
+
 	// Input file
 	try{
 		readInput(argv[2], pSingelton);

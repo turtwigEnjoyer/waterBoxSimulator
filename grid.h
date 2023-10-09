@@ -6,6 +6,10 @@
 class grid{
 
     private:
+        const static TPrecisionInfo VISCOSITY =0.4;
+        const static TPrecisionInfo RAD_MULT =1.695; 
+        const static TPrecisionInfo DENSITY =1000.0;
+
         vector<block> blocks;
 
         TPrecisionInfo ppm;
