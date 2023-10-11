@@ -6,9 +6,9 @@
 class grid{
 
     private:
-        const static TPrecisionInfo VISCOSITY =0.4;
-        const static TPrecisionInfo RAD_MULT =1.695; 
-        const static TPrecisionInfo DENSITY =1000.0;
+        constexpr static TPrecisionInfo VISCOSITY =0.4;
+        constexpr static TPrecisionInfo RAD_MULT =1.695; 
+        constexpr static TPrecisionInfo DENSITY =1000.0;
 
         vector<block> blocks;
 
@@ -36,8 +36,9 @@ class grid{
         void PutInBlock(particle::PParticle p, int whichBlock);
         int PutInBlock(ParticlePos pos); 
         void calculateDistances();
-        void ClearDistances();
+        void ClearDensities();
         void DensityTransformations();
+        void AccelerationTransfer();
         //std::move is more useful
 /*         void Move(particle::PParticle pParticula, TBlockIndex indiceOrigen, TBlockIndex indiceDestin); */
         TBlockIndex BlockIndex(vector<TPrecisionInfo> positions);

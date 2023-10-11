@@ -28,9 +28,9 @@ void grid::Load(ifstream& fin){
     //Initialise important "constants"
     grid::H2= pow(h,2);
     grid::H6 = pow(h,6);
-    PI_DIV15 = 15/(M_1_PI*H6);
     PI_DIV315 = (315*m)/(M_1_PI*pow(h,9)*64);
-    PI_DIV45 = 3* PI_DIV15* (float)VISCOSITY *m;
+    PI_DIV45 = 45*VISCOSITY*m/(M_PI*H6);
+    PI_DIV15 = PI_DIV45/2;
 
 }
 void grid::PutInBlock(particle::PParticle particle, int whichBlock){
@@ -68,22 +68,26 @@ void grid::calculateDistances(){
     }
 }
 int grid::WhichDirections(int index){
-    bool xDir, yDir, zDir;
+    bool xRightEdge, yRightEdge, zRightEdge;
+    bool xLeftEdge, yLeftEdge, zLeftEdge;
     /* We will treat every block as a corner, any block having to do at most 7 operations with its neighbors.
     We will calculate with the block on the xDirection if our x position is not an edge
         That is i%nx != nx-1 Because every k*(nx-1) mod nx is an edge by our indexing.
     Same for yDirection and zDirection. (the current code works thanks to integer division truncating results)
     Example nx=2 ny= 5. 2 Dimensions. Every second block will be an x edge, and blocks 8,9 will be y edges
 
-    Finally, as we have to consider the 8 cases of output, we return a decimal base representation
-    of our binary variables --> Zdir, Ydir, XDir e (000 --> 111)(binary)= (0-8)(decimal).
+    We return a tertiary base representation of this boolean. 2= Right Edge 1=Left Edge 0=No edge
     This is to do avoid HUGE if else statement with a switch
      */
-    (index % nx)!=(nx-1)?(xDir=true):xDir=false;
-    (index/nx)%ny !=ny-1 ?(yDir=true):yDir=false;
-    (index/(nx*ny))%nz != nz-1 ?(zDir=true):zDir=false;
+    (index % nx)==(nx-1)?(xRightEdge=true):xRightEdge=false;
+    (index/nx)%ny ==ny-1 ?(yRightEdge=true):yRightEdge=false;
+    (index/(nx*ny))%nz == nz-1 ?(zRightEdge=true):zRightEdge=false;
 
-    return 4*zDir+2*yDir+1*xDir;
+    (index % nx)==(0)?(xLeftEdge=true):xLeftEdge=false;
+    (index/nx)%ny ==0 ?(yLeftEdge=true):yLeftEdge=false;
+    (index/(nx*ny))%nz == 0 ?(zLeftEdge=true):zLeftEdge=false;
+
+    return 4*zRightEdge+2*yRightEdge+1*xRightEdge;
 }
 void grid::chooseDirections(int choose, size_t index){
     switch(choose){
@@ -135,13 +139,16 @@ void grid::YZdir(size_t index){
     blocks[index].CalculateDistances(blocks[index+nx*ny]); //ZDir
     blocks[index].CalculateDistances(blocks[index+nx*ny+nx]); //ZYDir
 }
-void grid::ClearDistances(){
+void grid::ClearDensities(){
     for(auto i : blocks){
-        i.ClearDistances();
+        i.ClearDensities();
     }
 }
 void grid::DensityTransformations(){
     for(auto i: blocks){
         i.DensityTransformations();
     }
+}
+void grid::AccelerationTransfer(){
+     
 }

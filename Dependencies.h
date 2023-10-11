@@ -16,15 +16,6 @@ using namespace std;
 
 typedef double TPrecisionInfo;
 
-#define RAD_MULT 1.695 
-#define DENSITY 1000.0
-#define STIFF_PRESS 3.0
-#define STIFF_COLL 30000.0
-#define DAMPING 128.0
-#define VISCOSITY 0.4
-#define P_SIZE 0.0002
-#define T_STEP 1000.0
-
 
 #define YMIN -0.08
 #define YMAX 0.1

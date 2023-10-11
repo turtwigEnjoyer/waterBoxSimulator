@@ -66,8 +66,9 @@ void particle::Sload(ifstream& fin, int pCount){
 void particle::CalculateDistance(PParticle& other)
 {
     TPrecisionInfo distance=pow(px-other.GetX(),2)+pow(py-other.GetY(),2)+pow(pz-other.GetZ(),2);
+/*  //We dont use a distances vector Anymore   
     distances.push_back(distance);
-    other.distances.push_back(distance);
+    other.distances.push_back(distance); */
     TPrecisionInfo increase = DensityIncrease(distance);
     AddDensity(increase);
     other.AddDensity(increase);
@@ -75,10 +76,11 @@ void particle::CalculateDistance(PParticle& other)
 }
 
 
-void particle::ClearDistances()
+/*  //Not in use
+    void particle::ClearDistances()
 {
     distances.clear();
-}
+} */
 TPrecisionInfo particle::DensityIncrease( TPrecisionInfo distance){
     if( distance < GRID.H2){
         return ( pow(GRID.H2-distance,3));

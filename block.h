@@ -6,7 +6,12 @@ using namespace std;
 class block{
 
         vector<particle::PParticle> particles;
-        vector<ParticlePos> positions;  
+        vector<ParticlePos> positions;
+        bool xRightEdge, yRightEdge, zRightEdge;
+        bool xLeftEdge, yLeftEdge, zLeftEdge;
+        private:
+        void amIEdge(int index);
+        void direction();  
         public:
         block();
         virtual ~block();
@@ -16,6 +21,6 @@ class block{
         void PushBack(ParticlePos pos);
         void CalculateDistances(block& other);
         void CalculateSelfDistances();
-        void ClearDistances();
+        void ClearDensities();
         void DensityTransformations();
 };
