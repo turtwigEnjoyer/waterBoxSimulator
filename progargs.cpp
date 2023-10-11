@@ -70,7 +70,7 @@ int pargs::checkParams(int argc, char** argv, grid& pSingelton) {
 		cout << headerMismatch << endl;
 		return -5;
 	}catch( int fileUnreachable){
-		cout << "Error: Cannot open init.fld for reading\n";
+		cout << "Error: Cannot open "<< argv[2] << " for reading\n";
 		return -3;
 	}
 	ofstream fout;
