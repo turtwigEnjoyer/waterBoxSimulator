@@ -21,12 +21,15 @@ particle::particle(float p[]){
     lastId++;
 
 }
-particle::particle(float x, float y, float z){ // For easier testing for Sandra
+int particle::particle1(float x, float y, float z){ // For easier testing for Sandra
     px= x;
     py= y;
     pz= z;
 }
 particle::~particle(){
+    
+}
+particle:: ~particle1(){
     
 }
 void particle::Sload(ifstream& fin, int pCount){
@@ -39,6 +42,10 @@ void particle::Sload(ifstream& fin, int pCount){
         GRID.PutInBlock(particle(p), blocksIndex); 
 	}
 }
+
+
+
+
 /* void particle::MoveTo(TPrecisionInfo x, TPrecisionInfo y, TPrecisionInfo z)
 {
     TBlockIndex newIndex=GRID.BlockIndex(x,y,z);
@@ -76,8 +83,7 @@ void particle::CalculateDistance(PParticle& other)
 }
 
 
-/*  //Not in use
-    void particle::ClearDistances()
+/*void particle::ClearDistances()
 {
     distances.clear();
 } */
