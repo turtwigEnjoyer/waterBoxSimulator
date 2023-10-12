@@ -49,9 +49,14 @@ void block::CalculateSelfDistances(){
 }
 */
 void block::CalculateDistances(block& other){
-    for(auto it= particles.begin();it!=particles.end();it++){
+    /* for(auto it= particles.begin();it!=particles.end();it++){
         for(auto jt=other.particles.begin();jt!=other.particles.end();jt++){
             it->CalculateDistance(*jt);
+        }
+    } */
+    for(size_t i= 0; i< particles.size(); i++){
+        for (size_t j= 0; j<other.particles.size();j++){
+            particles[i].CalculateDistance(other.particles[j]);
         }
     }
 }

@@ -36,6 +36,11 @@ void grid::Load(ifstream& fin){
 void grid::PutInBlock(particle::PParticle particle, int whichBlock){
     blocks[whichBlock].PushBack(particle);
 }
+void grid::PutInBlock(particle::PParticle particle){
+    int index=BlockIndex(particle.GetX(),particle.GetY(),particle.GetZ());
+    blocks[index].PushBack(particle);
+}
+
 int grid::PutInBlock(ParticlePos pos){
     int index=BlockIndex(pos.position);
     blocks[index].PushBack(pos);
@@ -59,11 +64,23 @@ TBlockIndex grid::BlockIndex(vector<TPrecisionInfo> positions){
 
     return ix+iy*nx+iz*(nx*ny);
 }
+TBlockIndex grid::BlockIndex(TPrecisionInfo px,TPrecisionInfo py,TPrecisionInfo pz ){
+    int ix=Range((px-XMIN)/sx,0,nx-1);
+    int iy=Range((py-YMIN)/sy,0,ny-1);
+    int iz=Range((pz-ZMIN)/sz,0,nz-1);
+
+    return ix+iy*nx+iz*(nx*ny);
+}
 
 void grid::calculateDistances(){
 
     for(size_t index=0; index< blocks.size(); index++){
-        blocks[index].CalculateSelfDistances();
+        if( index==4422){
+            index++;
+            index--;
+        }
+        cout <<" block: "<< index<<endl;
+        blocks[index].CalculateSelfDistances(); //Good
         chooseDirections( WhichDirections( static_cast<int>(index) ), index);
     }
 }
@@ -87,7 +104,8 @@ int grid::WhichDirections(int index){
     (index/nx)%ny ==0 ?(yLeftEdge=true):yLeftEdge=false;
     (index/(nx*ny))%nz == 0 ?(zLeftEdge=true):zLeftEdge=false;
 
-    return 4*zRightEdge+2*yRightEdge+1*xRightEdge;
+    int ret = 4*(int)zRightEdge+2*(int)yRightEdge+1*(int)xRightEdge;
+    return ret;
 }
 void grid::chooseDirections(int choose, size_t index){
     switch(choose){

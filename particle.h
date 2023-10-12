@@ -26,7 +26,8 @@ class particle{
     TPrecisionInfo px,py,pz;
     TPrecisionInfo vx,vy,vz;
     TPrecisionInfo hvx,hvy,hvz;
-    TPrecisionInfo density;
+    TPrecisionInfo density; 
+
 
     particle(float initArray[]);
     particle(float x, float y, float z); //for tests   
@@ -44,7 +45,6 @@ class particle{
     TPrecisionInfo GetY() const;
     TPrecisionInfo GetZ() const;
     TPrecisionInfo GetDensity() const;
-    void AddDensity(TPrecisionInfo increase);
     void ClearDensity();
     void DensityTransformation();
 
@@ -54,5 +54,6 @@ class particle{
   private:
     void MoveTo(TPrecisionInfo x, TPrecisionInfo y, TPrecisionInfo z);
     void PutInCaja();
+    void AddDensity(TPrecisionInfo increase);
 
 };

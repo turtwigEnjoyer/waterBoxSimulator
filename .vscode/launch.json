@@ -7,7 +7,7 @@
             "request": "launch",
             "program": "${workspaceFolder}/build/fluid",
             "args": [
-                "3",
+                "2000",
                 "${workspaceFolder}/build/small.fld",
                 "${workspaceFolder}/build/fout.fld"
             ],

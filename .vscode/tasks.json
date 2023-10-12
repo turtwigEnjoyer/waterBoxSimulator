@@ -16,20 +16,17 @@
         {
             "type": "shell",
             "label": "buildRelease",
-            "command": "cmake",
-            "args": [
-                "-B release",
-                "-DCMAKE_BUILD_TYPE=Release"
-            ],
+            "command": "make",
+            "args": [],
             "options": {
-                "cwd": "${workspaceFolder}"
+                "cwd": "${workspaceFolder}/release"
             },
             "problemMatcher": [
                 "$gcc"
             ],
             "group": "build",
             "detail": "Generate Release Version"
-        }
+        },
     ],
     "version": "2.0.0"
 }

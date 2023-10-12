@@ -16,6 +16,7 @@ particle::particle(float p[]){
     hvx = p[6];
     hvy = p[7];
     hvz = p[8];
+    density=0;
 
     id=lastId;
     lastId++;
@@ -34,9 +35,14 @@ void particle::Sload(ifstream& fin, int pCount){
 	float p[9];  //create an space of 9 to define the body of each particle
 	//Particles are read, intiliased and stored in a vector
 	for (int i = 0; i< pCount; i++){
+        if (i== pCount-1){
+            i++;
+            i--;
+        }
 		fin.read(reinterpret_cast<char*>(p), 9* sizeof(float));
-        int blocksIndex= GRID.PutInBlock(ParticlePos(p));
-        GRID.PutInBlock(particle(p), blocksIndex); 
+        //int blocksIndex= GRID.PutInBlock(ParticlePos(p));
+        
+        GRID.PutInBlock(particle(p)); 
 	}
 }
 /* void particle::MoveTo(TPrecisionInfo x, TPrecisionInfo y, TPrecisionInfo z)
@@ -65,12 +71,10 @@ void particle::Sload(ifstream& fin, int pCount){
  */
 void particle::CalculateDistance(PParticle& other)
 {
-    TPrecisionInfo distance=pow(px-other.GetX(),2)+pow(py-other.GetY(),2)+pow(pz-other.GetZ(),2);
-/*  //We dont use a distances vector Anymore   
-    distances.push_back(distance);
-    other.distances.push_back(distance); */
+    TPrecisionInfo distance=(px-other.GetX())*(px-other.GetX())+pow(py-other.GetY(),2)+pow(pz-other.GetZ(),2);
+
     TPrecisionInfo increase = DensityIncrease(distance);
-    AddDensity(increase);
+    //AddDensity(increase);
     other.AddDensity(increase);
 
 }
