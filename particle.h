@@ -5,19 +5,19 @@ class particle{
   public:
     typedef int TId; //We are using int now, but might need bigger
     typedef particle PParticle;
-    // vector<TPrecisionInfo> distances; We were using too much memory! !    
+    
+    // vector<TPrecisionInfo> distances; We were using too much memory! !
     //static vector<particle> particles; Not needed any more
 
   private:
     static TId lastId;
     static int sParticles;
 
-
-    constexpr static TPrecisionInfo STIFF_PRESS =3.0;
-    constexpr static TPrecisionInfo STIFF_COLL =30000.0;
-    constexpr static TPrecisionInfo DAMPING =128.0;
-    constexpr static TPrecisionInfo P_SIZE =0.0002;
-    constexpr static TPrecisionInfo T_STEP =1000.0;
+    static constexpr TPrecisionInfo STIFF_PRESS = 3.0;
+    static constexpr TPrecisionInfo STIFF_COLL =30000.0;
+    static constexpr TPrecisionInfo DAMPING =128.0;
+    static constexpr TPrecisionInfo P_SIZE =0.0002;
+    static constexpr TPrecisionInfo T_STEP =1000.0;
 
     int id;
     //TBlockIndex blockIndex; //Is it really useful?
@@ -30,14 +30,16 @@ class particle{
 
 
     particle(float initArray[]);
-    particle(float x, float y, float z); //for tests   
+    int particle1(float x, float y, float z); //for tests   
 
   public://no entiendo la definición que has hecho aqui...
 
     virtual ~particle();
+    virtual ~particle1();//no se como hacer el destructor
     void MoveTo(float x, float y, float z);
     static void Sload(ifstream& fin, int pCount);
     //void ClearDistances();
+  
   public:
    //Getters and setters
     TId GetId() const;
@@ -47,6 +49,7 @@ class particle{
     TPrecisionInfo GetDensity() const;
     void ClearDensity();
     void DensityTransformation();
+    void ClearDistances();
 
     void Reposition();
     void CalculateDistance(PParticle& other);
