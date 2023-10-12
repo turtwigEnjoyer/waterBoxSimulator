@@ -35,7 +35,7 @@ void grid::Load(ifstream& fin){
     cout << "Smoothing length: " << h << "\n";
     cout << "Particle mass: " << m << "\n";
     cout << "Grid size: " << nx << " x " << ny << " x " << nz <<"\n";
-    cout << "Number of blocks: \n" ;
+    cout << "Number of blocks: " << nx*ny*nz << "\n" ;
     cout << "Block size: " << sx << " x " << sy << " x " << sz << "\n";
 }
 void grid::PutInBlock(particle::PParticle particle, int whichBlock){
