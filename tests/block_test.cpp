@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
-#include "block.h"
-#include "particle.h"
+#include "../block.h"
+#include "../particle.h"
 
 
 // Test the block class
@@ -69,6 +69,59 @@ TEST(BlockTest, ClearDistances) {
     for (const auto& particle : testBlock.GetParticles()) {
         EXPECT_EQ(particle.GetDistances().size(), 0); //to verify that all particle distances within the block are cleared (have a size of 0)
     }*/
+}
+// The following tests prove the functionality of the diferent distances and densities:
+void testCalculateDistances() {
+    block myBlock1;
+    block myBlock2;
+ 
+    particle::PParticle particle1(0.5, 0.1, 0.2);
+    myBlock1.PushBack(particle1); // Agrega una partícula al primer bloque
+
+    particle::PParticle particle2(1.0, 0.7, 0.3);
+    myBlock2.PushBack(particle2); // Agrega una partícula al segundo bloque
+
+
+    // Realiza el cálculo de distancias entre los dos bloques
+    myBlock1.CalculateDistances(myBlock2);
+
+    // Agrega aquí aserciones para verificar si el cálculo fue exitoso
+}
+
+// Función para probar CalculateSelfDistances
+void testCalculateSelfDistances() {
+    block myBlock;
+
+    // Agrega algunas partículas al bloque
+
+    // Realiza el cálculo de distancias dentro del mismo bloque
+    myBlock.CalculateSelfDistances();
+
+    // Agrega aquí aserciones para verificar si el cálculo fue exitoso
+}
+
+// Función para probar ClearDensities
+void testClearDensities() {
+    block myBlock;
+
+    // Agrega algunas partículas al bloque
+
+    // Llama a la función para limpiar densidades
+    myBlock.ClearDensities();
+
+    // Agrega aquí aserciones para verificar que las densidades se hayan limpiado correctamente
+}
+
+// Función para probar DensityTransformations
+void testDensityTransformations() {
+    block myBlock;
+
+    // Agrega algunas partículas al bloque
+
+    // Llama a la función para realizar transformaciones de densidad
+    myBlock.DensityTransformations();
+
+    // Agrega aquí aserciones para verificar si las transformaciones se realizaron correctamente
 }
 
 

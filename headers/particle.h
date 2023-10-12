@@ -30,12 +30,12 @@ class particle{
 
 
     particle(float initArray[]);
-    int particle1(float x, float y, float z); //for tests   
+      
 
   public://no entiendo la definición que has hecho aqui...
-
+    particle(float x, float y, float z); //for tests 
     virtual ~particle();
-    virtual ~particle1();//no se como hacer el destructor
+
     void MoveTo(float x, float y, float z);
     static void Sload(ifstream& fin, int pCount);
     //void ClearDistances();

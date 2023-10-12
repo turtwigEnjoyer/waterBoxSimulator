@@ -1,7 +1,7 @@
-#include <iostream>
-#include "block.h"
-#include "particle.h"
-#include "ParticlePos.h"
+
+#include "headers/block.h"
+#include "headers/particle.h"
+
 
 
 block::block(){
@@ -9,10 +9,10 @@ block::block(){
 
 block::~block(){
 }
-size_t GetParticlesSize(){
+size_t block::GetParticlesSize(){
     return particles.size();
 }
-particle::PParticle GetParticleAtIndex(size_t index){
+particle::PParticle block::GetParticleAtIndex(size_t index){
     if (index < particles.size()) {
         return particles[index];
     } else {
@@ -31,8 +31,8 @@ void block::PushBack(ParticlePos pos)
 }
 
 //Here we include some unitary tests for the upper functions:
-
-void testPushBackParticle() {
+/* 
+void block::testPushBackParticle() {
     block myBlock; // Crea un objeto de la clase block
 
     particle::PParticle particle(0.5,0.1,0.2); //Create a particle
@@ -44,8 +44,8 @@ void testPushBackParticle() {
     } else {
         std::cout << "Test PushBackParticle: FAILED" << std::endl;
     }
-}
-
+} */
+/* 
 // Función para probar PushBack con posiciones
 void testPushBackPosition() {
     block myBlock; 
@@ -68,7 +68,7 @@ void testPushBackPosition() {
     } else {
         std::cout << "Test PushBackPosition: FAILED" << std::endl;
     }
-}
+} */
 
 
 
@@ -133,59 +133,6 @@ void block::DensityTransformations(){
     }
 }
 
-// The following tests prove the functionality of the diferent distances and densities:
-void testCalculateDistances() {
-    block myBlock1;
-    block myBlock2;
- 
-    particle::PParticle particle1(0.5, 0.1, 0.2);
-    myBlock1.PushBack(particle1); // Agrega una partícula al primer bloque
-
-    particle::PParticle particle2(1.0, 0.7, 0.3);
-    myBlock2.PushBack(particle2); // Agrega una partícula al segundo bloque
-
-
-    // Realiza el cálculo de distancias entre los dos bloques
-    myBlock1.CalculateDistances(myBlock2);
-
-    // Agrega aquí aserciones para verificar si el cálculo fue exitoso
-}
-
-// Función para probar CalculateSelfDistances
-void testCalculateSelfDistances() {
-    block myBlock;
-
-    // Agrega algunas partículas al bloque
-
-    // Realiza el cálculo de distancias dentro del mismo bloque
-    myBlock.CalculateSelfDistances();
-
-    // Agrega aquí aserciones para verificar si el cálculo fue exitoso
-}
-
-// Función para probar ClearDensities
-void testClearDensities() {
-    block myBlock;
-
-    // Agrega algunas partículas al bloque
-
-    // Llama a la función para limpiar densidades
-    myBlock.ClearDensities();
-
-    // Agrega aquí aserciones para verificar que las densidades se hayan limpiado correctamente
-}
-
-// Función para probar DensityTransformations
-void testDensityTransformations() {
-    block myBlock;
-
-    // Agrega algunas partículas al bloque
-
-    // Llama a la función para realizar transformaciones de densidad
-    myBlock.DensityTransformations();
-
-    // Agrega aquí aserciones para verificar si las transformaciones se realizaron correctamente
-}
 
 /*  void block::amIEdge(int index){
         
@@ -204,16 +151,3 @@ void testDensityTransformations() {
     (index/(nx*ny))%nz == 0 ?(zRightEdge=true):zRightEdge=false;
 } 
  */
-
-int main() {
-    
-    // Execute the main test, so we can see the result
-    testPushBackParticle();
-    testPushBackPosition();
-    testCalculateDistances();
-    testCalculateSelfDistances();
-    testClearDensities();
-    testDensityTransformations();
-
-    return 0;
-}

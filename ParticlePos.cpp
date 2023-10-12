@@ -1,4 +1,4 @@
-#include "ParticlePos.h"
+#include "headers/ParticlePos.h"
 
 ParticlePos::ParticlePos(float pos[]){
     for(int i= 0; i<3; i++){

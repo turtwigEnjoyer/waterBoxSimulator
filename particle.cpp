@@ -1,5 +1,5 @@
-#include "particle.h"
-#include "grid.h"
+#include "headers/particle.h"
+#include "headers/grid.h"
 
 particle::TId particle::lastId=0;
 int particle::sParticles=0;
@@ -22,15 +22,12 @@ particle::particle(float p[]){
     lastId++;
 
 }
-int particle::particle1(float x, float y, float z){ // For easier testing for Sandra
+particle::particle(float x, float y, float z){ // For easier testing for Sandra
     px= x;
     py= y;
     pz= z;
 }
 particle::~particle(){
-    
-}
-particle:: ~particle1(){
     
 }
 void particle::Sload(ifstream& fin, int pCount){
@@ -79,9 +76,9 @@ void particle::Sload(ifstream& fin, int pCount){
 void particle::CalculateDistance(PParticle& other)
 {
     TPrecisionInfo distance=(px-other.GetX())*(px-other.GetX())+pow(py-other.GetY(),2)+pow(pz-other.GetZ(),2);
-
+    
     TPrecisionInfo increase = DensityIncrease(distance);
-    //AddDensity(increase);
+    AddDensity(increase);
     other.AddDensity(increase);
 
 }
