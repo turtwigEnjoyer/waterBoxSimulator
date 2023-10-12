@@ -66,11 +66,13 @@ class grid{
         void XN(size_t index);
         void YP(size_t index);
         void YN(size_t index);
-
         void XYZdir(size_t index);
         void XYdir(size_t index);
         void XZdir(size_t index);
         void YZdir(size_t index);
+
+        void printGridInfo();
+        
 };
 
 #define GRID (*grid::pSingleton)
