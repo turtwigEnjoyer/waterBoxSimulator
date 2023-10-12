@@ -1,5 +1,5 @@
-#include "particle.h"
-#include "grid.h"
+#include "headers/particle.h"
+#include "headers/grid.h"
 
 particle::TId particle::lastId=0;
 int particle::sParticles=0;

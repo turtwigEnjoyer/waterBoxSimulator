@@ -1,4 +1,4 @@
-#include "grid.h"
+#include "headers/grid.h"
 
 grid* grid::pSingleton;
 
@@ -76,28 +76,19 @@ TBlockIndex grid::BlockIndex(TPrecisionInfo px,TPrecisionInfo py,TPrecisionInfo 
 
     return ix+iy*nx+iz*(nx*ny);
 }
-void grid:: countParticles(){
-    int c= 0;
-    for (auto i : blocks){
-        for(auto j: i.particles){
-            c++;
-        }
-    }
-    cout << "Particle num:" << c;
-}
 void grid::calculateDistances(){
 
     for(size_t index=0; index< blocks.size(); index++){
         cout <<" block: "<< index<<endl;
         blocks[index].CalculateSelfDistances(); //Good
-        int choose = WhichDirections( static_cast<int>(index) );
-        chooseDirections( choose, index);
+        direction(index);
     }
 }
+/*  Fallen out of Use. Dont delete just in case
 int grid::WhichDirections(int index){
     bool xRightEdge, yRightEdge, zRightEdge;
     bool xLeftEdge, yLeftEdge, zLeftEdge;
-    /* We will treat every block as a corner, any block having to do at most 7 operations with its neighbors.
+     We will treat every block as a corner, any block having to do at most 7 operations with its neighbors.
     We will calculate with the block on the xDirection if our x position is not an edge
         That is i%nx != nx-1 Because every k*(nx-1) mod nx is an edge by our indexing.
     Same for yDirection and zDirection. (the current code works thanks to integer division truncating results)
@@ -105,7 +96,7 @@ int grid::WhichDirections(int index){
 
     We return a tertiary base representation of this boolean. 2= Right Edge 1=Left Edge 0=No edge
     This is to do avoid HUGE if else statement with a switch
-     */
+     
     (index % nx)==(nx-1)?(xRightEdge=true):xRightEdge=false;
     (index/nx)%ny ==ny-1 ?(yRightEdge=true):yRightEdge=false;
     (index/(nx*ny))%nz == nz-1 ?(zRightEdge=true):zRightEdge=false;
@@ -116,7 +107,8 @@ int grid::WhichDirections(int index){
 
     int ret = 4*(int)zRightEdge+2*(int)yRightEdge+1*(int)xRightEdge;
     return ret;
-}
+}*/
+/*
 void grid::chooseDirections(int choose, size_t index){
     switch(choose){
         case(0):
@@ -163,10 +155,12 @@ void grid::XZdir(size_t index){
     blocks[index].CalculateDistances(blocks[index+nx*ny+1]); //ZXDir
 }
 void grid::YZdir(size_t index){
+
     blocks[index].CalculateDistances(blocks[index+nx]);//YDir
     blocks[index].CalculateDistances(blocks[index+nx*ny]); //ZDir
     blocks[index].CalculateDistances(blocks[index+nx*ny+nx]); //ZYDir
 }
+ */
 void grid::ClearDensities(){
     for(auto i : blocks){
         i.ClearDensities();
@@ -177,6 +171,148 @@ void grid::DensityTransformations(){
         i.DensityTransformations();
     }
 }
-void grid::AccelerationTransfer(){
-     
+
+
+//Este codigo es lo mas feo que he escrito en mi vida -Nora
+//Basicamente determina en que direccion calculamos las distancias
+//Como regla para no calcular dos veces siempre calculamos con indices de blocks mayores al nuestro
+//Es TAN largo y feo xq las direcciones cambian segun si no somos, o somos borde positivo o negativo de X,Y,Z
+//Se reduce a 16 casos (Creo (Revisar luego)), Esta bien hecho asi que no tocar porfi
+//P.D. Sandra no hacen falta tests
+void grid::direction(size_t index){
+    dirZedge(index);
+    if(!blocks[index].zPosEdge){
+        return;
+    }
+    else{
+        int rep= 1*blocks[index].xPosEdge+2*blocks[index].xNegEdge+3*blocks[index].yPosEdge+6*blocks[index].yNegEdge;
+        dirZFree(rep, index );
+    }
+}
+void grid::dirZedge(size_t index){
+    if(blocks[index].yPosEdge){
+        if(blocks[index].xPosEdge){
+            blocks[index].CalculateDistances(blocks[index+1]);
+        }
+    }else{
+        blocks[index].CalculateDistances(blocks[index+nx]);
+        if(blocks[index].xPosEdge){
+            blocks[index].CalculateDistances(blocks[index+nx]);
+            blocks[index].CalculateDistances(blocks[index+nx-1]);
+        }
+        else if(blocks[index].xNegEdge){
+            blocks[index].CalculateDistances(blocks[index+1]);
+            blocks[index].CalculateDistances(blocks[index+nx+1]);
+
+        }else{
+            blocks[index].CalculateDistances(blocks[index+1]);
+            blocks[index].CalculateDistances(blocks[index+nx-1]);
+            blocks[index].CalculateDistances(blocks[index+nx+1]);
+        }
+    }
+}
+void grid::dirZFree(int rep, size_t index){
+    switch(rep){
+        case(0): Alldir( index);
+        break;
+        case(1): XP( index);
+        break;
+        case(2): XN( index);
+        break;
+        case(3): YP( index);
+        break;
+        case(4): XPYP( index);
+        break;
+        case(5): XNYP( index);
+        break;
+        case(6): YN( index);
+        break;
+        case(7): XPYN( index);
+        break;
+        case(8): XPYP( index);
+        break;
+    }
+}
+void grid::Alldir(size_t index){
+    blocks[index].CalculateDistances(blocks[index+ny*nx -nx -1]);
+    blocks[index].CalculateDistances(blocks[index+ny*nx -nx]);
+    blocks[index].CalculateDistances(blocks[index+ny*nx -nx +1]);
+
+    blocks[index].CalculateDistances(blocks[index+ny*nx -1]);
+    blocks[index].CalculateDistances(blocks[index+ny*nx]);
+    blocks[index].CalculateDistances(blocks[index+ny*nx +1]);
+
+    blocks[index].CalculateDistances(blocks[index+ny*nx +nx -1]);
+    blocks[index].CalculateDistances(blocks[index+ny*nx +nx]);
+    blocks[index].CalculateDistances(blocks[index+ny*nx +nx +1]);
+}
+void grid::XPYP(size_t index){
+    blocks[index].CalculateDistances(blocks[index+ny*nx -nx -1]);
+    blocks[index].CalculateDistances(blocks[index+ny*nx -nx]);
+
+    blocks[index].CalculateDistances(blocks[index+ny*nx -1]);
+    blocks[index].CalculateDistances(blocks[index+ny*nx]);
+
+}
+void grid::XPYN(size_t index){
+    blocks[index].CalculateDistances(blocks[index+ny*nx]);
+    blocks[index].CalculateDistances(blocks[index+ny*nx +1]);  
+    blocks[index].CalculateDistances(blocks[index+ny*nx +nx]);
+    blocks[index].CalculateDistances(blocks[index+ny*nx +nx +1]);
+
+}
+void grid::XP(size_t index){
+    blocks[index].CalculateDistances(blocks[index+ny*nx -nx -1]);
+    blocks[index].CalculateDistances(blocks[index+ny*nx -nx]);
+
+    blocks[index].CalculateDistances(blocks[index+ny*nx -1]);
+    blocks[index].CalculateDistances(blocks[index+ny*nx]);
+
+    blocks[index].CalculateDistances(blocks[index+ny*nx +nx -1]);
+    blocks[index].CalculateDistances(blocks[index+ny*nx +nx]);
+}
+void grid::XNYP(size_t index){
+    blocks[index].CalculateDistances(blocks[index+ny*nx -nx]);
+    blocks[index].CalculateDistances(blocks[index+ny*nx -nx +1]);
+
+    blocks[index].CalculateDistances(blocks[index+ny*nx]);
+    blocks[index].CalculateDistances(blocks[index+ny*nx +1]);
+
+}
+void grid::XNYN(size_t index){
+
+    blocks[index].CalculateDistances(blocks[index+ny*nx]);
+    blocks[index].CalculateDistances(blocks[index+ny*nx +1]);
+
+    blocks[index].CalculateDistances(blocks[index+ny*nx +nx]);
+    blocks[index].CalculateDistances(blocks[index+ny*nx +nx +1]);
+}
+void grid::XN(size_t index){
+    blocks[index].CalculateDistances(blocks[index+ny*nx -nx]);
+    blocks[index].CalculateDistances(blocks[index+ny*nx -nx +1]);
+
+    blocks[index].CalculateDistances(blocks[index+ny*nx]);
+    blocks[index].CalculateDistances(blocks[index+ny*nx +1]);
+
+    blocks[index].CalculateDistances(blocks[index+ny*nx +nx]);
+    blocks[index].CalculateDistances(blocks[index+ny*nx +nx +1]);
+}
+void grid::YP(size_t index){
+    blocks[index].CalculateDistances(blocks[index+ny*nx -nx -1]);
+    blocks[index].CalculateDistances(blocks[index+ny*nx -nx]);
+    blocks[index].CalculateDistances(blocks[index+ny*nx -nx +1]);
+
+    blocks[index].CalculateDistances(blocks[index+ny*nx -1]);
+    blocks[index].CalculateDistances(blocks[index+ny*nx]);
+    blocks[index].CalculateDistances(blocks[index+ny*nx +1]);
+
+}
+void grid::YN(size_t index){
+    blocks[index].CalculateDistances(blocks[index+ny*nx -1]);
+    blocks[index].CalculateDistances(blocks[index+ny*nx]);
+    blocks[index].CalculateDistances(blocks[index+ny*nx +1]);
+
+    blocks[index].CalculateDistances(blocks[index+ny*nx +nx -1]);
+    blocks[index].CalculateDistances(blocks[index+ny*nx +nx]);
+    blocks[index].CalculateDistances(blocks[index+ny*nx +nx +1]);
 }

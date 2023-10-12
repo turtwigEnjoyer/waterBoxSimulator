@@ -54,6 +54,19 @@ class grid{
         void FillAdjacents();
         int WhichDirections(int index);
         void chooseDirections(int choose, size_t index);
+        void direction(size_t index);       
+        void dirZedge(size_t index);
+        void dirZFree(int rep, size_t index);
+        void Alldir(size_t index);
+        void XPYP(size_t index);
+        void XPYN(size_t index);
+        void XP(size_t index);
+        void XNYP(size_t index);
+        void XNYN(size_t index);
+        void XN(size_t index);
+        void YP(size_t index);
+        void YN(size_t index);
+
         void XYZdir(size_t index);
         void XYdir(size_t index);
         void XZdir(size_t index);

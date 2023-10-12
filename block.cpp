@@ -1,6 +1,6 @@
 
-#include "block.h"
-#include "particle.h"
+#include "headers/block.h"
+#include "headers/particle.h"
 
 
 
@@ -97,20 +97,48 @@ void block::DensityTransformations(){
 }
 
 
-/*  void block::amIEdge(int index){
-        
-    We will only calculate distances with forward blocks, assuming all backwards have been executed.
-    We will calculate with the block on the xDirection if our x position is an edge
-    That is i%nx == nx-1 Because every k*(nx-1) mod nx is an edge by our indexing. (Rightmost edge)
-    Same for yDirection and zDirection. (the current code works thanks to integer division truncating results)
-    Example nx=2 ny= 5. 2 Dimensions. Every second block will be an xRIghtEdge and blocks 8,9 will be yRightEdges
-    
-    (index % nx)==(nx-1)?(xRightEdge=true):xRightEdge=false;
-    (index/nx)%ny ==ny-1 ?(yRightEdge=true):yRightEdge=false;
-    (index/(nx*ny))%nz == nz-1 ?(zRightEdge=true):zRightEdge=false;
+ void block::amIEdge(int index, int nx, int ny, int nz){
+    //Is a block an edge of the grid, if so which edges
 
-    (index % nx)==(0)?(xRightEdge=true):xRightEdge=false;
-    (index/nx)%ny ==0 ?(yRightEdge=true):yRightEdge=false;
-    (index/(nx*ny))%nz == 0 ?(zRightEdge=true):zRightEdge=false;
-} 
- */
+    (index % nx)==(nx-1)?(xPosEdge=true):xPosEdge=false;
+    (index/nx)%ny ==ny-1 ?(yPosEdge=true):yPosEdge=false;
+    (index/(nx*ny))%nz == nz-1 ?(zPosEdge=true):zPosEdge=false;
+
+    (index % nx)==(0)?(xNegEdge=true):xNegEdge=false;
+    (index/nx)%ny ==0 ?(yNegEdge=true):yNegEdge=false;
+    //Result represented in tertiary base for simplicity (?is this the simplest way, really?)
+
+    //27 cases total... This seems overly complicated. Any ideas?
+    /* Cases:
+        NOT EDGE: 0
+        xPosEdge: 1
+        xNegEdge: 2
+        yPosEdge: 3
+        xPosEdge & yPosEdge: 4
+        xNegEdge & yPosEdge: 5
+        yNegEdge: 6
+        xPosEdge & yNegEdge: 7
+        xNegEdge & yNegEdge: 8
+        zPosEdge: 9
+        xNegEdge & zPosEdge: 11
+        xPosEdge & zPosEdge: 10
+        yPosEdge & zPosEdge: 12
+        xPosEdge & yPosEdge & zPosEdge: 13
+        xNegEdge & yPosEdge & zPosEdge: 14
+        yNegEdge & zPosEdge: 15
+        xPosEdge & yNegEdge & zPosEdge: 16
+        xNegEdge & yNegEdge & zPosEdge: 17  
+        zNegEdge: 18  
+        xPosEdge & zNegEdge: 19
+        xNegEdge & zNegEdge: 20
+        yPosEdge & zNegEdge: 21 
+        xPosEdge & yPosEdge & zNegEdge: 22
+        xNegEdge & yPosEdge & zNegEdge: 23
+        yNegEdge & zNegEdge: 24
+        xPosEdge & yNegEdge & zNegEdge: 25 
+        xNegEdge & yNegEdge & zNegEdge: 26       
+     */
+}
+
+
+

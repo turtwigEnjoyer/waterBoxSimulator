@@ -11,15 +11,15 @@ class block{
    vector<ParticlePos> positions;
    
    //The following function represent the truth about the boundaries, if the edge(borde) are present or not
-   bool xRightEdge, yRightEdge, zRightEdge;
-   bool xLeftEdge, yLeftEdge, zLeftEdge;
+   int edgeRepresentation;
+
 
    private:
-      void amIEdge(int index);
-      void direction();       
-
+      void amIEdge(int index, int nx, int ny, int nz);
    public:
       vector<particle::PParticle> particles;
+      bool xPosEdge, yPosEdge, zPosEdge;
+      bool xNegEdge, yNegEdge, zNegEdge;
       block();
       virtual ~block(); //destructure of the block class, where a subclass can implement its own functions
 
