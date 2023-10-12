@@ -29,9 +29,7 @@ int particle::particle1(float x, float y, float z){ // For easier testing for Sa
 particle::~particle(){
     
 }
-particle:: ~particle1(){
-    
-}
+
 void particle::Sload(ifstream& fin, int pCount){
 	
 	float p[9];  //create an space of 9 to define the body of each particle

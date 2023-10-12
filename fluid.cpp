@@ -1,8 +1,6 @@
 /* DEADLINE OCTOBER 30TH !!  */
 
-
 #include "progargs.h"
-
 
 int main(int argc, char** argv)
 {

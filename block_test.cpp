@@ -9,12 +9,12 @@ TEST(BlockTest, BlockOperations) {
     block testBlock;
 
     // Create some particles or ParticlePos objects (assuming you have a way to create them)
-    particle::PParticle particle1(0.1,1,0.2);
-    ParticlePos position1(3);
+    particle::PParticle particle1(0.1,1.0,0.2);
+    //ParticlePos position1(3); ahora mismo no usamos
 
     // Push particles or positions to the block
     testBlock.PushBack(particle1);
-    testBlock.PushBack(position1);
+    //testBlock.PushBack(position1); ahora mismo no usamos
 
     // Call CalculateDistances and CalculateSelfDistances (assuming these methods are defined)
     block otherBlock; // Create another block for testing distances
@@ -32,9 +32,9 @@ TEST(BlockTest, PushParticles) {
     block testBlock;
 
     // Create some particles
-    particle::PParticle particle1(0.1,1,0.2);
-    particle::PParticle particle2(1,0.5,0.2);
-    particle::PParticle particle3(0,0.6, 0.8);
+    particle::PParticle particle1(0.1,1.0,0.2);
+    particle::PParticle particle2(1.0,0.5,0.2);
+    particle::PParticle particle3(0.0,0.6,0.8);
 
     // Push particles into the block
     testBlock.PushBack(particle1);
