@@ -73,13 +73,12 @@ void particle::Sload(ifstream& fin, int pCount){
     az=INIT_GZ;
 }
  */
-void particle::CalculateDistance(PParticle& other)
+TPrecisionInfo particle::CalculateDistance(PParticle other)
 {
-    TPrecisionInfo distance=(px-other.GetX())*(px-other.GetX())+pow(py-other.GetY(),2)+pow(pz-other.GetZ(),2);
-    
-    TPrecisionInfo increase = DensityIncrease(distance);
-    AddDensity(increase);
-    other.AddDensity(increase);
+    TPrecisionInfo dx=(px-other.GetX())*(px-other.GetX());
+    TPrecisionInfo dy= pow(py-other.GetY(),2);
+    TPrecisionInfo dz = pow(pz-other.GetZ(),2);
+    return DensityIncrease(dx+dy+dz);
 
 }
 

@@ -41,6 +41,8 @@ class grid{
         void ClearDensities();
         void DensityTransformations();
         void AccelerationTransfer();
+
+        void countParticles();
         //std::move is more useful
 /*         void Move(particle::PParticle pParticula, TBlockIndex indiceOrigen, TBlockIndex indiceDestin); */
         TBlockIndex BlockIndex(vector<TPrecisionInfo> positions);

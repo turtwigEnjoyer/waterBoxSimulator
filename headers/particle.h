@@ -52,7 +52,7 @@ class particle{
     void ClearDistances();
 
     void Reposition();
-    void CalculateDistance(PParticle& other);
+    TPrecisionInfo CalculateDistance(PParticle other);
     TPrecisionInfo DensityIncrease(TPrecisionInfo distance);
   private:
     void MoveTo(TPrecisionInfo x, TPrecisionInfo y, TPrecisionInfo z);

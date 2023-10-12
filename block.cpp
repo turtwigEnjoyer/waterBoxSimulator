@@ -31,46 +31,6 @@ void block::PushBack(ParticlePos pos)
 }
 
 //Here we include some unitary tests for the upper functions:
-/* 
-void block::testPushBackParticle() {
-    block myBlock; // Crea un objeto de la clase block
-
-    particle::PParticle particle(0.5,0.1,0.2); //Create a particle
-    myBlock.PushBack(particle); // Agrega la partícula al bloque
-
-    // Verifica si la partícula se ha agregado correctamente
-    if (myBlock.particles.size() == 1) {
-        std::cout << "Test PushBackParticle: PASSED" << std::endl;
-    } else {
-        std::cout << "Test PushBackParticle: FAILED" << std::endl;
-    }
-} */
-/* 
-// Función para probar PushBack con posiciones
-void testPushBackPosition() {
-    block myBlock; 
-
-    float pos[3] = {1.0, 2.0, 3.0}; //initialized a vector pos which contains the informartion to testPos
-    ParticlePos testPos(pos); // Crea una posición de prueba
-    myBlock.PushBack(testPos); // Agrega la posición al bloque
-
-    bool testPassed = false;  // Inicializa una variable para el resultado de la prueba
-
-    for (size_t i = 0; i < myBlock.positions.size(); i++){
-        if (pos == testPos) {
-            testPassed = true;  // Se encontró testPos en el vector
-            break;  // Puedes salir del bucle si la encontraste
-        }
-}
-
-    if (testPassed) {
-        std::cout << "Test PushBackPosition: PASSED" << std::endl;
-    } else {
-        std::cout << "Test PushBackPosition: FAILED" << std::endl;
-    }
-} */
-
-
 
 /* void block::PutOut(particle::PParticle pParticle)
 {
@@ -100,15 +60,18 @@ void block::CalculateSelfDistances(){
     }
 }
 */
+TPrecisionInfo CalculateDistance(particle a, particle b){
+    TPrecisionInfo dx=pow((a.GetX()-b.GetX()),2);
+    TPrecisionInfo dy= pow((a.GetY()-b.GetY()),2);
+    TPrecisionInfo dz = pow((a.GetZ()-b.GetZ()),2);
+    return dx+dy+dz;
+}
 void block::CalculateDistances(block& other){
-    /* for(auto it= particles.begin();it!=particles.end();it++){
-        for(auto jt=other.particles.begin();jt!=other.particles.end();jt++){
-            it->CalculateDistance(*jt);
-        }
-    } */
     for(size_t i= 0; i< particles.size(); i++){
         for (size_t j= 0; j<other.particles.size();j++){
-            particles[i].CalculateDistance(other.particles[j]);
+            TPrecisionInfo distance= CalculateDistance(particles[i],other.particles[j]);
+            particles[i].DensityIncrease(distance);
+            other.particles[j].DensityIncrease(distance);
         }
     }
 }

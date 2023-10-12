@@ -71,17 +71,22 @@ TBlockIndex grid::BlockIndex(TPrecisionInfo px,TPrecisionInfo py,TPrecisionInfo 
 
     return ix+iy*nx+iz*(nx*ny);
 }
-
+void grid:: countParticles(){
+    int c= 0;
+    for (auto i : blocks){
+        for(auto j: i.particles){
+            c++;
+        }
+    }
+    cout << "Particle num:" << c;
+}
 void grid::calculateDistances(){
 
     for(size_t index=0; index< blocks.size(); index++){
-        if( index==4422){
-            index++;
-            index--;
-        }
         cout <<" block: "<< index<<endl;
         blocks[index].CalculateSelfDistances(); //Good
-        chooseDirections( WhichDirections( static_cast<int>(index) ), index);
+        int choose = WhichDirections( static_cast<int>(index) );
+        chooseDirections( choose, index);
     }
 }
 int grid::WhichDirections(int index){
@@ -109,28 +114,28 @@ int grid::WhichDirections(int index){
 }
 void grid::chooseDirections(int choose, size_t index){
     switch(choose){
-        case(7):
+        case(0):
             XYZdir(index);
         break;
-        case(6):
+        case(1):
             YZdir(index);
         break;
-        case(5):
+        case(2):
             XZdir(index);
         break;
-        case(4): //Only Z
+        case(3): //Only Z
             blocks[index].CalculateDistances(blocks[index+nx*ny]);
         break;
-        case(3):
+        case(4):
             XYdir(index);
         break;
-        case(2): //Only Y
+        case(5): //Only Y
             blocks[index].CalculateDistances(blocks[index+nx]);
         break;
-        case(1): //Only X
+        case(6): //Only X
             blocks[index].CalculateDistances(blocks[index+1]);
         break;
-        //Case 0 We do nothing
+        //Case 7 We do nothing
     }
 }
 void grid::XYZdir(size_t index){

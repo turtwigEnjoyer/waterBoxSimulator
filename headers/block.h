@@ -7,7 +7,7 @@ using namespace std;
 
 class block{
    private:
-   vector<particle::PParticle> particles;
+   
    vector<ParticlePos> positions;
    
    //The following function represent the truth about the boundaries, if the edge(borde) are present or not
@@ -19,6 +19,7 @@ class block{
       void direction();       
 
    public:
+      vector<particle::PParticle> particles;
       block();
       virtual ~block(); //destructure of the block class, where a subclass can implement its own functions
 
