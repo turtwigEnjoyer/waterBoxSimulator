@@ -6,7 +6,7 @@ using namespace std;
 //This is the class of a block which includes the functions related to the content of the block
 
 class block{
-
+   private:
    vector<particle::PParticle> particles;
    vector<ParticlePos> positions;
    
@@ -34,3 +34,5 @@ class block{
       particle::PParticle GetParticleAtIndex(size_t index);
 
 };
+//tests
+   void testCalculateDistances();

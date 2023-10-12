@@ -1,6 +1,8 @@
 /* DEADLINE OCTOBER 30TH !!  */
 
-#include "progargs.h"
+
+#include "headers/progargs.h"
+
 
 int main(int argc, char** argv)
 {
@@ -11,7 +13,7 @@ int main(int argc, char** argv)
 	int out= pargs::checkParams(argc, argv, singletonGrid);
 	if(out<0) return out;
 
-	int timeSteps=300;
+	int timeSteps=100;
 	//1000 takes 815 seconds
 	//100 takes 8s With ParticlePos 6s with particle only
 	//300 Takes 54s wtih ParticlePos 49s without. Difference seeems linear but iteration growth isnt?

@@ -5,9 +5,9 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS_OFF)
 
 ## BUILDS IN DEBUG BY DEFAULT!! IMPORTANT LATER
-#add_compile_options(-Wall -Wextra -Werror -pedantic -pedantic-errors -ggdb  -g)
+add_compile_options(-Wall -Wextra -Werror -pedantic -pedantic-errors -ggdb  -g)
 ## TO REMOVE DEBUG REPLACE BY:
-add_compile_options(-Wall -Wextra -Werror -pedantic -pedantic-errors)
+#add_compile_options(-Wall -Wextra -Werror -pedantic -pedantic-errors)
 
 set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -march=native")
 ##

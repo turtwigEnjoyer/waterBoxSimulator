@@ -34,7 +34,9 @@ class grid{
         
         void Load(ifstream& pFile);
         void PutInBlock(particle::PParticle p, int whichBlock);
-        int PutInBlock(ParticlePos pos); 
+        int PutInBlock(ParticlePos pos);
+        void PutInBlock(particle::PParticle particle);
+         
         void calculateDistances();
         void ClearDensities();
         void DensityTransformations();
@@ -42,6 +44,7 @@ class grid{
         //std::move is more useful
 /*         void Move(particle::PParticle pParticula, TBlockIndex indiceOrigen, TBlockIndex indiceDestin); */
         TBlockIndex BlockIndex(vector<TPrecisionInfo> positions);
+        TBlockIndex BlockIndex(TPrecisionInfo px,TPrecisionInfo py,TPrecisionInfo pz );
         /* void determineBlock(particle p);
         void repositionParticles(); //4.3.1 Repositioning Particles    
         */
