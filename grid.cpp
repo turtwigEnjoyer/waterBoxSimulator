@@ -1,4 +1,4 @@
-#include "headers/grid.h"
+#include "grid.h"
 
 grid* grid::pSingleton;
 
@@ -31,7 +31,12 @@ void grid::Load(ifstream& fin){
     PI_DIV315 = (315*m)/(M_1_PI*pow(h,9)*64);
     PI_DIV45 = 45*VISCOSITY*m/(M_PI*H6);
     PI_DIV15 = PI_DIV45/2;
-
+    cout << "Particles per meter: " << rppm << "\n";
+    cout << "Smoothing length: " << h << "\n";
+    cout << "Particle mass: " << m << "\n";
+    cout << "Grid size: " << nx << " x " << ny << " x " << nz <<"\n";
+    cout << "Number of blocks: \n" ;
+    cout << "Block size: " << sx << " x " << sy << " x " << sz << "\n";
 }
 void grid::PutInBlock(particle::PParticle particle, int whichBlock){
     blocks[whichBlock].PushBack(particle);

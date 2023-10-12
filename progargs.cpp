@@ -1,4 +1,4 @@
-#include "headers/progargs.h"
+#include "progargs.h"
 
 using namespace std;
 
@@ -38,14 +38,15 @@ void pargs::readInput(char* filename, grid& singletonGrid){
 	
 	//Calculates particle count from total file size -header
 	const int pCount = (fileSize- sizeof(float)- sizeof(int))/(sizeof(float)*9);
-
+	cout << "Number of particles: " << pCount << "\n";
 	//Initializes Grid, important constants
 	singletonGrid.Load(fin); // reads ppm, intializes grid and blocks
 	fin.read(reinterpret_cast<char*>(&np), sizeof(int));
     if (np != pCount){
 		throw "Error: Number of particles mismatch. Header: "+ to_string(np)+ ", Found: " + to_string(pCount);
 		return;
-	} 
+	}
+
     particle::Sload(fin, pCount);
 }
 
@@ -73,6 +74,7 @@ int pargs::checkParams(int argc, char** argv, grid& pSingelton) {
 		cout << "Error: Cannot open "<< argv[2] << " for reading\n";
 		return -3;
 	}
+
 	ofstream fout;
 /* 	fout.open(argv[3], std::ios::binary | std::ios::out);
 	if(!fout){
