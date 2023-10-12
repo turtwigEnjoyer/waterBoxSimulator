@@ -1,5 +1,6 @@
+
 #pragma once
-#include "ParticlePos.h"
+#include "headers\ParticlePos.h"
 
 class particle{
   public:
@@ -30,10 +31,11 @@ class particle{
 
 
     particle(float initArray[]);
-      
+   
 
   public://no entiendo la definición que has hecho aqui...
-    particle(float x, float y, float z); //for tests 
+  
+    particle(float x, float y, float z); //for tests   
     virtual ~particle();
 
     void MoveTo(float x, float y, float z);

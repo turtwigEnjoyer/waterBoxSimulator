@@ -1,5 +1,5 @@
-#include "headers/particle.h"
-#include "headers/grid.h"
+#include "headers\particle.h"
+#include "headers\grid.h"
 
 particle::TId particle::lastId=0;
 int particle::sParticles=0;
@@ -30,6 +30,7 @@ particle::particle(float x, float y, float z){ // For easier testing for Sandra
 particle::~particle(){
     
 }
+
 void particle::Sload(ifstream& fin, int pCount){
 	
 	float p[9];  //create an space of 9 to define the body of each particle
@@ -45,7 +46,6 @@ void particle::Sload(ifstream& fin, int pCount){
         GRID.PutInBlock(particle(p)); 
 	}
 }
-
 
 
 
@@ -81,7 +81,6 @@ TPrecisionInfo particle::CalculateDistance(PParticle other)
     return DensityIncrease(dx+dy+dz);
 
 }
-
 
 /*void particle::ClearDistances()
 {
