@@ -108,6 +108,11 @@ void block::DensityTransformations(){
     (index/nx)%ny ==0 ?(yNegEdge=true):yNegEdge=false;
     //Result represented in tertiary base for simplicity (?is this the simplest way, really?)
 
+    // nx*ny*nz
+    //block(indice)
+    // block(27)    y=3 z=0 x=7
+    // block[0][3][7]
+    // indice % numberXBlocks == 0 o nx-1
     //27 cases total... This seems overly complicated. Any ideas?
     /* Cases:
         NOT EDGE: 0

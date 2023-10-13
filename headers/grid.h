@@ -41,6 +41,8 @@ class grid{
         void ClearDensities();
         void DensityTransformations();
         void AccelerationTransfer();
+        
+        void printGridInfo(int numberParticles);
 
         void countParticles();
         //std::move is more useful
@@ -71,7 +73,6 @@ class grid{
         void XZdir(size_t index);
         void YZdir(size_t index);
 
-        void printGridInfo(int numberParticles);
         
 };
 

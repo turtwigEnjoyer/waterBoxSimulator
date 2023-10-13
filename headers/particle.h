@@ -23,7 +23,7 @@ class particle{
     int id;
     //TBlockIndex blockIndex; //Is it really useful?
     //Should they be vectors or arrays? They will be accessed together most of the time
-    //TPrecisionInfo ax,ay,az;
+    TPrecisionInfo ax,ay,az;
     TPrecisionInfo px,py,pz;
     TPrecisionInfo vx,vy,vz;
     TPrecisionInfo hvx,hvy,hvz;

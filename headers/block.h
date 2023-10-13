@@ -20,6 +20,7 @@ class block{
       vector<particle::PParticle> particles;
       bool xPosEdge, yPosEdge, zPosEdge;
       bool xNegEdge, yNegEdge, zNegEdge;
+      
       block();
       virtual ~block(); //destructure of the block class, where a subclass can implement its own functions
 
