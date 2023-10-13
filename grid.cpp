@@ -23,7 +23,6 @@ void grid::Load(ifstream& fin){
     sz = (ZMAX-ZMIN)/nz;
     //initialize blocks
     blocks = vector<block>(nx*ny*nz);
-    //FillAdjacents(); //Maybe irrelevant? We should try without to make more readable
 
     //Initialise important "constants"
     grid::H2= pow(h,2);
@@ -31,7 +30,11 @@ void grid::Load(ifstream& fin){
     PI_DIV315 = (315*m)/(M_1_PI*pow(h,9)*64);
     PI_DIV45 = 45*VISCOSITY*m/(M_PI*H6);
     PI_DIV15 = PI_DIV45/2;
-    cout << "Particles per meter: " << rppm << "\n";
+
+}
+void grid::printGridInfo(int numberParticles){
+    cout << "Number of particles: " << numberParticles << "\n";
+    cout << "Particles per meter: " << ppm << "\n";
     cout << "Smoothing length: " << h << "\n";
     cout << "Particle mass: " << m << "\n";
     cout << "Grid size: " << nx << " x " << ny << " x " << nz <<"\n";

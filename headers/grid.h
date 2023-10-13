@@ -71,7 +71,7 @@ class grid{
         void XZdir(size_t index);
         void YZdir(size_t index);
 
-        void printGridInfo();
+        void printGridInfo(int numberParticles);
         
 };
 
