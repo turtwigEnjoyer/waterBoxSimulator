@@ -144,6 +144,23 @@ void block::DensityTransformations(){
         xNegEdge & yNegEdge & zNegEdge: 26       
      */
 }
+void block::PushBackAdjacents(int index){
+    adjacents.push_back(index);
+}
+void block::CalculateSelfAccelerations(){
+    for (size_t i= 0; i<particles.size(); i++){
+        for(size_t j=i+1; j<particles.size();j++){
+            particles[i].CalculateAccelerations(particles[j]);
+        }
+    }
+}
+void block::CalculateAccelerations(block& other){
+    for(size_t i= 0; i< particles.size(); i++){
+        for (size_t j= 0; j<other.particles.size();j++){
+            particles[i].CalculateAccelerations(other.particles[j]);
+        }
+    }
+}
 
 
 

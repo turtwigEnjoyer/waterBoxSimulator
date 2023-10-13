@@ -52,6 +52,7 @@ class particle{
     void ClearDensity();
     void DensityTransformation();
     void ClearDistances();
+    void CalculateAccelerations(particle& other);
 
     void Reposition();
     TPrecisionInfo CalculateDistance(PParticle other);

@@ -9,8 +9,9 @@ grid::~grid(){
 
 }
 void grid::initializeBlocks(){
-    for(int index= 0; index<blocks.size();index++){
+    for(size_t index= 0; index<blocks.size();index++){
         blocks[index].amIEdge(index,nx,ny,nz);
+        direction(index);
     }
 }
 
@@ -84,12 +85,21 @@ TBlockIndex grid::BlockIndex(TPrecisionInfo px,TPrecisionInfo py,TPrecisionInfo 
 
     return ix+iy*nx+iz*(nx*ny);
 }
-void grid::calculateDistances(){
+void grid::DensityIncrease(){
 
     for(size_t index=0; index< blocks.size(); index++){
-        cout <<" block: "<< index<<endl;
         blocks[index].CalculateSelfDistances(); //Good
-        direction(index);
+        for(int i: blocks[index].adjacents){ //integer vector of all adjacent indexes
+            blocks[index].CalculateDistances(blocks[i]);
+        }
+    }
+}
+void grid::AccelerationTransfer(){
+    for (size_t index =0; index< blocks.size(); index++){
+        blocks[index].CalculateSelfAccelerations();
+        for(int i: blocks[index].adjacents){
+            blocks[index].CalculateAccelerations(blocks[i]);
+        }
     }
 }
 /*  Fallen out of Use. Dont delete just in case
@@ -189,7 +199,7 @@ void grid::DensityTransformations(){
 //P.D. Sandra no hacen falta tests
 void grid::direction(size_t index){
     dirZedge(index);
-    if(!blocks[index].zPosEdge){
+    if(blocks[index].zPosEdge){
         return;
     }
     else{
@@ -200,22 +210,22 @@ void grid::direction(size_t index){
 void grid::dirZedge(size_t index){
     if(blocks[index].yPosEdge){
         if(blocks[index].xPosEdge){
-            blocks[index].CalculateDistances(blocks[index+1]);
+            blocks[index].PushBackAdjacents(index+1);
         }
     }else{
-        blocks[index].CalculateDistances(blocks[index+nx]);
+        blocks[index].PushBackAdjacents(index+nx);
         if(blocks[index].xPosEdge){
-            blocks[index].CalculateDistances(blocks[index+nx]);
-            blocks[index].CalculateDistances(blocks[index+nx-1]);
+            blocks[index].PushBackAdjacents(index+nx);
+            blocks[index].PushBackAdjacents(index+nx-1);
         }
         else if(blocks[index].xNegEdge){
-            blocks[index].CalculateDistances(blocks[index+1]);
-            blocks[index].CalculateDistances(blocks[index+nx+1]);
+            blocks[index].PushBackAdjacents(index+1);
+            blocks[index].PushBackAdjacents(index+nx+1);
 
         }else{
-            blocks[index].CalculateDistances(blocks[index+1]);
-            blocks[index].CalculateDistances(blocks[index+nx-1]);
-            blocks[index].CalculateDistances(blocks[index+nx+1]);
+            blocks[index].PushBackAdjacents(index+1);
+            blocks[index].PushBackAdjacents(index+nx-1);
+            blocks[index].PushBackAdjacents(index+nx+1);
         }
     }
 }
@@ -242,85 +252,86 @@ void grid::dirZFree(int rep, size_t index){
     }
 }
 void grid::Alldir(size_t index){
-    blocks[index].CalculateDistances(blocks[index+ny*nx -nx -1]);
-    blocks[index].CalculateDistances(blocks[index+ny*nx -nx]);
-    blocks[index].CalculateDistances(blocks[index+ny*nx -nx +1]);
+    blocks[index].PushBackAdjacents(index+ny*nx -nx -1);
+    blocks[index].PushBackAdjacents(index+ny*nx -nx);
+    blocks[index].PushBackAdjacents(index+ny*nx -nx +1);
 
-    blocks[index].CalculateDistances(blocks[index+ny*nx -1]);
-    blocks[index].CalculateDistances(blocks[index+ny*nx]);
-    blocks[index].CalculateDistances(blocks[index+ny*nx +1]);
+    blocks[index].PushBackAdjacents(index+ny*nx -1);
+    blocks[index].PushBackAdjacents(index+ny*nx);
+    blocks[index].PushBackAdjacents(index+ny*nx +1);
 
-    blocks[index].CalculateDistances(blocks[index+ny*nx +nx -1]);
-    blocks[index].CalculateDistances(blocks[index+ny*nx +nx]);
-    blocks[index].CalculateDistances(blocks[index+ny*nx +nx +1]);
+    blocks[index].PushBackAdjacents(index+ny*nx +nx -1);
+    blocks[index].PushBackAdjacents(index+ny*nx +nx);
+    blocks[index].PushBackAdjacents(index+ny*nx +nx +1);
 }
 void grid::XPYP(size_t index){
-    blocks[index].CalculateDistances(blocks[index+ny*nx -nx -1]);
-    blocks[index].CalculateDistances(blocks[index+ny*nx -nx]);
+    blocks[index].PushBackAdjacents(index+ny*nx -nx -1);
+    blocks[index].PushBackAdjacents(index+ny*nx -nx);
 
-    blocks[index].CalculateDistances(blocks[index+ny*nx -1]);
-    blocks[index].CalculateDistances(blocks[index+ny*nx]);
+    blocks[index].PushBackAdjacents(index+ny*nx -1);
+    blocks[index].PushBackAdjacents(index+ny*nx);
 
 }
 void grid::XPYN(size_t index){
-    blocks[index].CalculateDistances(blocks[index+ny*nx]);
-    blocks[index].CalculateDistances(blocks[index+ny*nx +1]);  
-    blocks[index].CalculateDistances(blocks[index+ny*nx +nx]);
-    blocks[index].CalculateDistances(blocks[index+ny*nx +nx +1]);
+    blocks[index].PushBackAdjacents(index+ny*nx);
+    blocks[index].PushBackAdjacents(index+ny*nx +1);  
+    blocks[index].PushBackAdjacents(index+ny*nx +nx);
+    blocks[index].PushBackAdjacents(index+ny*nx +nx +1);
 
 }
 void grid::XP(size_t index){
-    blocks[index].CalculateDistances(blocks[index+ny*nx -nx -1]);
-    blocks[index].CalculateDistances(blocks[index+ny*nx -nx]);
+    blocks[index].PushBackAdjacents(index+ny*nx -nx -1);
+    blocks[index].PushBackAdjacents(index+ny*nx -nx);
 
-    blocks[index].CalculateDistances(blocks[index+ny*nx -1]);
-    blocks[index].CalculateDistances(blocks[index+ny*nx]);
+    blocks[index].PushBackAdjacents(index+ny*nx -1);
+    blocks[index].PushBackAdjacents(index+ny*nx);
 
-    blocks[index].CalculateDistances(blocks[index+ny*nx +nx -1]);
-    blocks[index].CalculateDistances(blocks[index+ny*nx +nx]);
+    blocks[index].PushBackAdjacents(index+ny*nx +nx -1);
+    blocks[index].PushBackAdjacents(index+ny*nx +nx);
 }
 void grid::XNYP(size_t index){
-    blocks[index].CalculateDistances(blocks[index+ny*nx -nx]);
-    blocks[index].CalculateDistances(blocks[index+ny*nx -nx +1]);
+    blocks[index].PushBackAdjacents(index+ny*nx -nx);
+    blocks[index].PushBackAdjacents(index+ny*nx -nx +1);
 
-    blocks[index].CalculateDistances(blocks[index+ny*nx]);
-    blocks[index].CalculateDistances(blocks[index+ny*nx +1]);
+    blocks[index].PushBackAdjacents(index+ny*nx);
+    blocks[index].PushBackAdjacents(index+ny*nx +1);
 
 }
 void grid::XNYN(size_t index){
 
-    blocks[index].CalculateDistances(blocks[index+ny*nx]);
-    blocks[index].CalculateDistances(blocks[index+ny*nx +1]);
+    blocks[index].PushBackAdjacents(index+ny*nx);
+    blocks[index].PushBackAdjacents(index+ny*nx +1);
 
-    blocks[index].CalculateDistances(blocks[index+ny*nx +nx]);
-    blocks[index].CalculateDistances(blocks[index+ny*nx +nx +1]);
+    blocks[index].PushBackAdjacents(index+ny*nx +nx);
+    blocks[index].PushBackAdjacents(index+ny*nx +nx +1);
 }
 void grid::XN(size_t index){
-    blocks[index].CalculateDistances(blocks[index+ny*nx -nx]);
-    blocks[index].CalculateDistances(blocks[index+ny*nx -nx +1]);
+    blocks[index].PushBackAdjacents(index+ny*nx -nx);
+    blocks[index].PushBackAdjacents(index+ny*nx -nx +1);
 
-    blocks[index].CalculateDistances(blocks[index+ny*nx]);
-    blocks[index].CalculateDistances(blocks[index+ny*nx +1]);
+    blocks[index].PushBackAdjacents(index+ny*nx);
+    blocks[index].PushBackAdjacents(index+ny*nx +1);
 
-    blocks[index].CalculateDistances(blocks[index+ny*nx +nx]);
-    blocks[index].CalculateDistances(blocks[index+ny*nx +nx +1]);
+    blocks[index].PushBackAdjacents(index+ny*nx +nx);
+    blocks[index].PushBackAdjacents(index+ny*nx +nx +1);
 }
 void grid::YP(size_t index){
-    blocks[index].CalculateDistances(blocks[index+ny*nx -nx -1]);
-    blocks[index].CalculateDistances(blocks[index+ny*nx -nx]);
-    blocks[index].CalculateDistances(blocks[index+ny*nx -nx +1]);
+    blocks[index].PushBackAdjacents(index+ny*nx -nx -1);
+    blocks[index].PushBackAdjacents(index+ny*nx -nx);
+    blocks[index].PushBackAdjacents(index+ny*nx -nx +1);
 
-    blocks[index].CalculateDistances(blocks[index+ny*nx -1]);
-    blocks[index].CalculateDistances(blocks[index+ny*nx]);
-    blocks[index].CalculateDistances(blocks[index+ny*nx +1]);
+    blocks[index].PushBackAdjacents(index+ny*nx -1);
+    blocks[index].PushBackAdjacents(index+ny*nx);
+    blocks[index].PushBackAdjacents(index+ny*nx +1);
 
 }
 void grid::YN(size_t index){
-    blocks[index].CalculateDistances(blocks[index+ny*nx -1]);
-    blocks[index].CalculateDistances(blocks[index+ny*nx]);
-    blocks[index].CalculateDistances(blocks[index+ny*nx +1]);
+    blocks[index].PushBackAdjacents(index+ny*nx -1);
+    blocks[index].PushBackAdjacents(index+ny*nx);
+    blocks[index].PushBackAdjacents(index+ny*nx +1);
 
-    blocks[index].CalculateDistances(blocks[index+ny*nx +nx -1]);
-    blocks[index].CalculateDistances(blocks[index+ny*nx +nx]);
-    blocks[index].CalculateDistances(blocks[index+ny*nx +nx +1]);
+    blocks[index].PushBackAdjacents(index+ny*nx +nx -1);
+    blocks[index].PushBackAdjacents(index+ny*nx +nx);
+    blocks[index].PushBackAdjacents(index+ny*nx +nx +1);
 }
+

@@ -118,3 +118,7 @@ void particle::AddDensity(TPrecisionInfo increase){
 void particle::ClearDensity(){
     density= 0;
 }
+void particle::CalculateAccelerations(particle& other){
+    //NOt funtional yet
+    other.ax++;
+}

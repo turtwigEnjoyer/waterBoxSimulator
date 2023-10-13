@@ -38,7 +38,7 @@ class grid{
         int PutInBlock(ParticlePos pos);
         void PutInBlock(particle::PParticle particle);
          
-        void calculateDistances();
+        void DensityIncrease();
         void ClearDensities();
         void DensityTransformations();
         void AccelerationTransfer();

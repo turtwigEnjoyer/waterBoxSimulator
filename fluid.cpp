@@ -24,9 +24,9 @@ int main(int argc, char** argv)
 	{
 		//4.3.2
 		singletonGrid.ClearDensities(); //Sets Distances to 0. Doesnt set acceleration to 0 yet
-		singletonGrid.calculateDistances(); //Performs 4.3.2 Densities Increase
+		singletonGrid.DensityIncrease(); //Performs 4.3.2 Densities Increase
 		singletonGrid.DensityTransformations(); // Perfroms 4.3.2 Densitie Transformations
-		//singletonGrid.AccelerationTransfer();
+		singletonGrid.AccelerationTransfer();
 	} 
 	auto stop = chrono::high_resolution_clock::now();
 	auto duration = chrono::duration_cast<chrono::microseconds>(stop - start);
