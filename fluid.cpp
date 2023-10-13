@@ -12,6 +12,7 @@ int main(int argc, char** argv)
 	// Particles for now are stored in a class static array
 	int out= pargs::checkParams(argc, argv, singletonGrid);
 	if(out<0) return out;
+	singletonGrid.initializeBlocks();
 
 	int timeSteps=100;
 	//1000 takes 815 seconds

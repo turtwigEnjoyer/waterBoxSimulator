@@ -32,6 +32,7 @@ class grid{
         grid();
         virtual ~grid();
         
+        void initializeBlocks();
         void Load(ifstream& pFile);
         void PutInBlock(particle::PParticle p, int whichBlock);
         int PutInBlock(ParticlePos pos);

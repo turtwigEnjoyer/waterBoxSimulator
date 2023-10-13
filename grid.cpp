@@ -8,6 +8,11 @@ grid::grid(){
 grid::~grid(){
 
 }
+void grid::initializeBlocks(){
+    for(int index= 0; index<blocks.size();index++){
+        blocks[index].amIEdge(index,nx,ny,nz);
+    }
+}
 
 void grid::Load(ifstream& fin){
     float rppm;
