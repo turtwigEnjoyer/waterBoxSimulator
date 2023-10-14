@@ -12,7 +12,7 @@ int main(int argc, char** argv)
 	// Particles for now are stored in a class static array
 	int out= pargs::checkParams(argc, argv, singletonGrid);
 	if(out<0) return out;
-	singletonGrid.initializeBlocks(); //Blocks
+	singletonGrid.initializeBlocks(); //Blocks, no se si aqui tenemos que cambiarlo para que haga las funciones que cambiaste el otro día?s
 
 	int timeSteps=100;
 	//1000 takes 815 seconds
@@ -27,6 +27,7 @@ int main(int argc, char** argv)
 		singletonGrid.DensityIncrease(); //Performs 4.3.2 Densities Increase
 		singletonGrid.DensityTransformations(); // Perfroms 4.3.2 Densitie Transformations
 		singletonGrid.AccelerationTransfer();
+		singletonGrid.CalculateCollisions();//Calculate the collision with boolean values of the bocks, to know if they are boundaries or not
 	} 
 	auto stop = chrono::high_resolution_clock::now();
 	auto duration = chrono::duration_cast<chrono::microseconds>(stop - start);

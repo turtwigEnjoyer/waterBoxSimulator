@@ -336,3 +336,24 @@ void grid::YN(size_t index){
     blocks[index].PushBackAdjacents(index+ny*nx +nx +1);
 }
 
+//Function to calculate the collisions --> igual se puede reducir llamando a amIEdge?
+void grid::CalculateCollisions(){
+    for (size_t index =0; index< blocks.size(); index++){
+        
+        if (blocks[index].xPosEdge == true || blocks[index].xNegEdge == true || blocks[index].yPosEdge == true || blocks[index].yNegEdge == true || blocks[index].zPosEdge == true|| blocks[index].zNegEdge == true ){
+            if (blocks[index].xPosEdge == true){
+                blocks[index].CalculateCollisionsXP();
+            }else if (blocks[index].xNegEdge == true){
+                blocks[index].CalculateCollisionsXN();
+            }else if  (blocks[index].yPosEdge == true){
+                blocks[index].CalculateCollisionsYP();
+            }else if (blocks[index].yNegEdge == true){
+                blocks[index].CalculateCollisionsYN();
+            }else if (blocks[index].zPosEdge == true){
+                blocks[index].CalculateCollisionsZP();
+            }else if (blocks[index].zNegEdge == true){
+                blocks[index].CalculateCollisionsZN();
+            }
+        }
+    }
+}

@@ -48,7 +48,6 @@ void particle::Sload(ifstream& fin, int pCount){
 }
 
 
-
 /* void particle::MoveTo(TPrecisionInfo x, TPrecisionInfo y, TPrecisionInfo z)
 {
     TBlockIndex newIndex=GRID.BlockIndex(x,y,z);
@@ -112,6 +111,18 @@ particle::TId particle::GetId() const{
 TPrecisionInfo particle::GetDensity() const{
     return density;
 }
+TPrecisionInfo particle::GetAX() const{//Getters of accelerations
+    return ax;
+}
+TPrecisionInfo particle::GetAY() const{
+    return ay;
+}
+TPrecisionInfo particle::GetAZ() const{
+    return az;
+}
+
+
+//particles's Functions
 void particle::AddDensity(TPrecisionInfo increase){
     density= density +increase;
 }
@@ -122,3 +133,51 @@ void particle::CalculateAccelerations(particle& other){
     //NOt funtional yet
     other.ax++;
 }
+
+//Funtions of Collisions Blocks
+void particle::CalculateCollisionsXP(){
+    px = px + hvx*T_STEP;
+    double difx = P_SIZE-(px-XMIN);
+    if(difx > (1e-10)){
+       ax = ax + ((STIFF_COLL*difx)-(DAMPING*vx)); 
+    }
+    
+}
+void particle::CalculateCollisionsXN(){
+    px= px + hvx*T_STEP;
+    double difx = P_SIZE-(XMAX-px);
+    if(difx > (1e-10)){
+        ax = ax - ((STIFF_COLL*difx)+(DAMPING*vx));
+    }
+}
+void particle::CalculateCollisionsYP(){
+    py = py + hvy*T_STEP;
+    double dify = P_SIZE-(py-YMIN);
+    if(dify > (1e-10)){
+        ay = ay + ((STIFF_COLL*dify)-(DAMPING*vy));
+    }  
+}
+void particle::CalculateCollisionsYN(){
+    py= py + hvy*T_STEP;
+    double dify = P_SIZE-(YMAX-px);
+    if(dify > (1e-10)){
+        ay = ay - ((STIFF_COLL*dify)+(DAMPING*vy));
+    }
+}
+void particle::CalculateCollisionsZP(){
+    pz= pz+ hvz*T_STEP;
+    double difz = P_SIZE-(px-ZMIN);
+    if(difz > (1e-10)){
+        az = az + ((STIFF_COLL*difz)-(DAMPING*vz));
+    } 
+}
+void particle::CalculateCollisionsZN(){
+    pz= pz+ hvz*T_STEP;
+    double difz = P_SIZE-(ZMAX-pz);
+    if(difz > (1e-10)){
+        az = az - ((STIFF_COLL*difz)+(DAMPING*vz));
+    }
+}
+
+
+//Particles motion 

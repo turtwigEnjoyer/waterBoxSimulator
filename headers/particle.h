@@ -14,11 +14,13 @@ class particle{
     static TId lastId;
     static int sParticles;
 
+    static constexpr TPrecisionInfo FLUID_DENSITY = 1000.0;
     static constexpr TPrecisionInfo STIFF_PRESS = 3.0;
     static constexpr TPrecisionInfo STIFF_COLL =30000.0;
     static constexpr TPrecisionInfo DAMPING =128.0;
+    static constexpr TPrecisionInfo VISCOSITY = 0.4;
     static constexpr TPrecisionInfo P_SIZE =0.0002;
-    static constexpr TPrecisionInfo T_STEP =1000.0;
+    static constexpr TPrecisionInfo T_STEP =0.001;
 
     int id;
     //TBlockIndex blockIndex; //Is it really useful?
@@ -49,14 +51,32 @@ class particle{
     TPrecisionInfo GetY() const;
     TPrecisionInfo GetZ() const;
     TPrecisionInfo GetDensity() const;
+    TPrecisionInfo GetAX() const;
+    TPrecisionInfo GetAY() const;
+    TPrecisionInfo GetAZ() const;
+   
+    
+    //Particles functions 
     void ClearDensity();
     void DensityTransformation();
     void ClearDistances();
     void CalculateAccelerations(particle& other);
+  
+  
+    //Collision´s Function for particles
+    void CalculateCollisionsXP();
+    void CalculateCollisionsXN();
+    void CalculateCollisionsYP();
+    void CalculateCollisionsYN();
+    void CalculateCollisionsZP();
+    void CalculateCollisionsZN();
+    
+
 
     void Reposition();
     TPrecisionInfo CalculateDistance(PParticle other);
     TPrecisionInfo DensityIncrease(TPrecisionInfo distance);
+    
   private:
     void MoveTo(TPrecisionInfo x, TPrecisionInfo y, TPrecisionInfo z);
     void PutInCaja();

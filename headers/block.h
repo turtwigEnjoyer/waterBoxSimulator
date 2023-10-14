@@ -34,6 +34,13 @@ class block{
       void DensityTransformations();
       void CalculateSelfAccelerations();
       void CalculateAccelerations(block& other);
+      void CalculateCollisionsXP();//Collision With X Function
+      void CalculateCollisionsXN();//Collision With X Function
+      void CalculateCollisionsYP();//Collision With Y Function
+      void CalculateCollisionsYN();//Collision With Y Function
+      void CalculateCollisionsZP();//Collision With Z Function
+      void CalculateCollisionsZN();//Collision With Z Function
+
       //for tests 
       size_t GetParticlesSize();
       particle::PParticle GetParticleAtIndex(size_t index);

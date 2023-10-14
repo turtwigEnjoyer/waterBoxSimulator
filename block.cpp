@@ -156,11 +156,42 @@ void block::CalculateSelfAccelerations(){
 }
 void block::CalculateAccelerations(block& other){
     for(size_t i= 0; i< particles.size(); i++){
-        for (size_t j= 0; j<other.particles.size();j++){
+        for (size_t j= 0; j<other.particles.size();j++){ //esto se refiere al calculo de aceleraciones con otro blocke no?
             particles[i].CalculateAccelerations(other.particles[j]);
         }
     }
 }
 
+//Collision's Functions depending on the axe
+void block::CalculateCollisionsXP(){
+    for (size_t i= 0; i<particles.size(); i++){
+        particles[i].CalculateCollisionsXP();
+    }
+}
+void block::CalculateCollisionsXN(){
+    for (size_t i= 0; i<particles.size(); i++){
+        particles[i].CalculateCollisionsXN();
+    }
+}
+void block::CalculateCollisionsYP(){
+    for (size_t i= 0; i<particles.size(); i++){
+        particles[i].CalculateCollisionsYP();
+    }
+}
+void block::CalculateCollisionsYN(){
+    for (size_t i= 0; i<particles.size(); i++){
+        particles[i].CalculateCollisionsYN();
+    }
+}
+void block::CalculateCollisionsZP(){
+    for (size_t i= 0; i<particles.size(); i++){
+        particles[i].CalculateCollisionsZP();
+    }
+}
+void block::CalculateCollisionsZN(){
+    for (size_t i= 0; i<particles.size(); i++){
+        particles[i].CalculateCollisionsZN();
+    }
+}
 
 
