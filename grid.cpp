@@ -179,6 +179,7 @@ void grid::YZdir(size_t index){
     blocks[index].CalculateDistances(blocks[index+nx*ny+nx]); //ZYDir
 }
  */
+
 void grid::ClearDensities(){
     for(auto i : blocks){
         i.ClearDensities();
