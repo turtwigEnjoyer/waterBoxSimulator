@@ -8,6 +8,15 @@ grid::grid(){
 grid::~grid(){
 
 }
+<<<<<<< Updated upstream
+=======
+void grid::initializeBlocks(){
+    for(size_t index= 0; index<blocks.size();index++){
+        blocks[index].amIEdge(index,nx,ny,nz);
+        direction(index);
+    }
+}
+>>>>>>> Stashed changes
 
 void grid::Load(ifstream& fin){
     float rppm;
@@ -71,6 +80,7 @@ TBlockIndex grid::BlockIndex(TPrecisionInfo px,TPrecisionInfo py,TPrecisionInfo 
 
     return ix+iy*nx+iz*(nx*ny);
 }
+<<<<<<< Updated upstream
 void grid:: countParticles(){
     int c= 0;
     for (auto i : blocks){
@@ -81,12 +91,28 @@ void grid:: countParticles(){
     cout << "Particle num:" << c;
 }
 void grid::calculateDistances(){
+=======
+void grid::DensityIncrease(){
+>>>>>>> Stashed changes
 
     for(size_t index=0; index< blocks.size(); index++){
-        cout <<" block: "<< index<<endl;
         blocks[index].CalculateSelfDistances(); //Good
+<<<<<<< Updated upstream
         int choose = WhichDirections( static_cast<int>(index) );
         chooseDirections( choose, index);
+=======
+        for(int i: blocks[index].adjacents){ //integer vector of all adjacent indexes
+            blocks[index].CalculateDistances(blocks[i]);
+        }
+    }
+}
+void grid::AccelerationTransfer(){
+    for (size_t index =0; index< blocks.size(); index++){
+        blocks[index].CalculateSelfAccelerations();
+        for(int i: blocks[index].adjacents){
+            blocks[index].CalculateAccelerations(blocks[i]);
+        }
+>>>>>>> Stashed changes
     }
 }
 int grid::WhichDirections(int index){
@@ -172,6 +198,155 @@ void grid::DensityTransformations(){
         i.DensityTransformations();
     }
 }
+<<<<<<< Updated upstream
 void grid::AccelerationTransfer(){
      
 }
+=======
+
+
+//Este codigo es lo mas feo que he escrito en mi vida -Nora
+//Basicamente determina en que direccion calculamos las distancias
+//Como regla para no calcular dos veces siempre calculamos con indices de blocks mayores al nuestro
+//Es TAN largo y feo xq las direcciones cambian segun si no somos, o somos borde positivo o negativo de X,Y,Z
+//Se reduce a 16 casos (Creo (Revisar luego)), Esta bien hecho asi que no tocar porfi
+//P.D. Sandra no hacen falta tests
+void grid::direction(size_t index){
+    dirZedge(index);
+    if(blocks[index].zPosEdge){
+        return;
+    }
+    else{
+        int rep= 1*blocks[index].xPosEdge+2*blocks[index].xNegEdge+3*blocks[index].yPosEdge+6*blocks[index].yNegEdge;
+        dirZFree(rep, index );
+    }
+}
+void grid::dirZedge(size_t index){
+    if(blocks[index].yPosEdge){
+        if(blocks[index].xPosEdge){
+            blocks[index].PushBackAdjacents(index+1);
+        }
+    }else{
+        blocks[index].PushBackAdjacents(index+nx);
+        if(blocks[index].xPosEdge){
+            blocks[index].PushBackAdjacents(index+nx);
+            blocks[index].PushBackAdjacents(index+nx-1);
+        }
+        else if(blocks[index].xNegEdge){
+            blocks[index].PushBackAdjacents(index+1);
+            blocks[index].PushBackAdjacents(index+nx+1);
+
+        }else{
+            blocks[index].PushBackAdjacents(index+1);
+            blocks[index].PushBackAdjacents(index+nx-1);
+            blocks[index].PushBackAdjacents(index+nx+1);
+        }
+    }
+}
+void grid::dirZFree(int rep, size_t index){
+    switch(rep){
+        case(0): Alldir( index);
+        break;
+        case(1): XP( index);
+        break;
+        case(2): XN( index);
+        break;
+        case(3): YP( index);
+        break;
+        case(4): XPYP( index);
+        break;
+        case(5): XNYP( index);
+        break;
+        case(6): YN( index);
+        break;
+        case(7): XPYN( index);
+        break;
+        case(8): XPYP( index);
+        break;
+    }
+}
+void grid::Alldir(size_t index){
+    blocks[index].PushBackAdjacents(index+ny*nx -nx -1);
+    blocks[index].PushBackAdjacents(index+ny*nx -nx);
+    blocks[index].PushBackAdjacents(index+ny*nx -nx +1);
+
+    blocks[index].PushBackAdjacents(index+ny*nx -1);
+    blocks[index].PushBackAdjacents(index+ny*nx);
+    blocks[index].PushBackAdjacents(index+ny*nx +1);
+
+    blocks[index].PushBackAdjacents(index+ny*nx +nx -1);
+    blocks[index].PushBackAdjacents(index+ny*nx +nx);
+    blocks[index].PushBackAdjacents(index+ny*nx +nx +1);
+}
+void grid::XPYP(size_t index){
+    blocks[index].PushBackAdjacents(index+ny*nx -nx -1);
+    blocks[index].PushBackAdjacents(index+ny*nx -nx);
+
+    blocks[index].PushBackAdjacents(index+ny*nx -1);
+    blocks[index].PushBackAdjacents(index+ny*nx);
+
+}
+void grid::XPYN(size_t index){
+    blocks[index].PushBackAdjacents(index+ny*nx);
+    blocks[index].PushBackAdjacents(index+ny*nx +1);  
+    blocks[index].PushBackAdjacents(index+ny*nx +nx);
+    blocks[index].PushBackAdjacents(index+ny*nx +nx +1);
+
+}
+void grid::XP(size_t index){
+    blocks[index].PushBackAdjacents(index+ny*nx -nx -1);
+    blocks[index].PushBackAdjacents(index+ny*nx -nx);
+
+    blocks[index].PushBackAdjacents(index+ny*nx -1);
+    blocks[index].PushBackAdjacents(index+ny*nx);
+
+    blocks[index].PushBackAdjacents(index+ny*nx +nx -1);
+    blocks[index].PushBackAdjacents(index+ny*nx +nx);
+}
+void grid::XNYP(size_t index){
+    blocks[index].PushBackAdjacents(index+ny*nx -nx);
+    blocks[index].PushBackAdjacents(index+ny*nx -nx +1);
+
+    blocks[index].PushBackAdjacents(index+ny*nx);
+    blocks[index].PushBackAdjacents(index+ny*nx +1);
+
+}
+void grid::XNYN(size_t index){
+
+    blocks[index].PushBackAdjacents(index+ny*nx);
+    blocks[index].PushBackAdjacents(index+ny*nx +1);
+
+    blocks[index].PushBackAdjacents(index+ny*nx +nx);
+    blocks[index].PushBackAdjacents(index+ny*nx +nx +1);
+}
+void grid::XN(size_t index){
+    blocks[index].PushBackAdjacents(index+ny*nx -nx);
+    blocks[index].PushBackAdjacents(index+ny*nx -nx +1);
+
+    blocks[index].PushBackAdjacents(index+ny*nx);
+    blocks[index].PushBackAdjacents(index+ny*nx +1);
+
+    blocks[index].PushBackAdjacents(index+ny*nx +nx);
+    blocks[index].PushBackAdjacents(index+ny*nx +nx +1);
+}
+void grid::YP(size_t index){
+    blocks[index].PushBackAdjacents(index+ny*nx -nx -1);
+    blocks[index].PushBackAdjacents(index+ny*nx -nx);
+    blocks[index].PushBackAdjacents(index+ny*nx -nx +1);
+
+    blocks[index].PushBackAdjacents(index+ny*nx -1);
+    blocks[index].PushBackAdjacents(index+ny*nx);
+    blocks[index].PushBackAdjacents(index+ny*nx +1);
+
+}
+void grid::YN(size_t index){
+    blocks[index].PushBackAdjacents(index+ny*nx -1);
+    blocks[index].PushBackAdjacents(index+ny*nx);
+    blocks[index].PushBackAdjacents(index+ny*nx +1);
+
+    blocks[index].PushBackAdjacents(index+ny*nx +nx -1);
+    blocks[index].PushBackAdjacents(index+ny*nx +nx);
+    blocks[index].PushBackAdjacents(index+ny*nx +nx +1);
+}
+
+>>>>>>> Stashed changes
