@@ -166,31 +166,37 @@ void block::CalculateAccelerations(block& other){
 void block::CalculateCollisionsXP(){
     for (size_t i= 0; i<particles.size(); i++){
         particles[i].CalculateCollisionsXP();
+        //cout << "CalculateCollisionsXP"<< endl;
     }
 }
 void block::CalculateCollisionsXN(){
     for (size_t i= 0; i<particles.size(); i++){
         particles[i].CalculateCollisionsXN();
+        //cout << "CalculateCollisionsXN"<< endl;
     }
 }
 void block::CalculateCollisionsYP(){
     for (size_t i= 0; i<particles.size(); i++){
         particles[i].CalculateCollisionsYP();
+        //cout << "CalculateCollisionsYP"<< endl;
     }
 }
 void block::CalculateCollisionsYN(){
     for (size_t i= 0; i<particles.size(); i++){
         particles[i].CalculateCollisionsYN();
+        //cout << "CalculateCollisionsYN"<< endl;
     }
 }
 void block::CalculateCollisionsZP(){
     for (size_t i= 0; i<particles.size(); i++){
         particles[i].CalculateCollisionsZP();
+        //cout << "CalculateCollisionsZP"<< endl;
     }
 }
 void block::CalculateCollisionsZN(){
     for (size_t i= 0; i<particles.size(); i++){
         particles[i].CalculateCollisionsZN();
+        //cout << "CalculateCollisionsZN"<< endl;
     }
 }
 

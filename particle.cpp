@@ -137,43 +137,48 @@ void particle::CalculateAccelerations(particle& other){
 //Funtions of Collisions Blocks
 void particle::CalculateCollisionsXP(){
     px = px + hvx*T_STEP;
-    double difx = P_SIZE-(px-XMIN);
+    //cout << "Position px: " << px << endl;
+    double difx = fabs(P_SIZE-(px-XMIN));//applied the absolute value so the difference is not negative
+    //cout << "Diference position x: " << difx << endl;
     if(difx > (1e-10)){
+       //cout << "Difference is greater. Position upload: " << px << endl;
        ax = ax + ((STIFF_COLL*difx)-(DAMPING*vx)); 
     }
-    
+    else{
+        cout <<"Particles position does not uploaded" << endl;
+    }   
 }
 void particle::CalculateCollisionsXN(){
     px= px + hvx*T_STEP;
-    double difx = P_SIZE-(XMAX-px);
+    double difx = fabs(P_SIZE-(XMAX-px));
     if(difx > (1e-10)){
         ax = ax - ((STIFF_COLL*difx)+(DAMPING*vx));
     }
 }
 void particle::CalculateCollisionsYP(){
     py = py + hvy*T_STEP;
-    double dify = P_SIZE-(py-YMIN);
+    double dify = fabs(P_SIZE-(py-YMIN));
     if(dify > (1e-10)){
         ay = ay + ((STIFF_COLL*dify)-(DAMPING*vy));
     }  
 }
 void particle::CalculateCollisionsYN(){
     py= py + hvy*T_STEP;
-    double dify = P_SIZE-(YMAX-px);
+    double dify = fabs(P_SIZE-(YMAX-px));
     if(dify > (1e-10)){
         ay = ay - ((STIFF_COLL*dify)+(DAMPING*vy));
     }
 }
 void particle::CalculateCollisionsZP(){
     pz= pz+ hvz*T_STEP;
-    double difz = P_SIZE-(px-ZMIN);
+    double difz = fabs(P_SIZE-(px-ZMIN));
     if(difz > (1e-10)){
         az = az + ((STIFF_COLL*difz)-(DAMPING*vz));
     } 
 }
 void particle::CalculateCollisionsZN(){
     pz= pz+ hvz*T_STEP;
-    double difz = P_SIZE-(ZMAX-pz);
+    double difz = fabs(P_SIZE-(ZMAX-pz));
     if(difz > (1e-10)){
         az = az - ((STIFF_COLL*difz)+(DAMPING*vz));
     }

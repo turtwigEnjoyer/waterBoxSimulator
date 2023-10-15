@@ -342,16 +342,22 @@ void grid::CalculateCollisions(){
         
         if (blocks[index].xPosEdge == true || blocks[index].xNegEdge == true || blocks[index].yPosEdge == true || blocks[index].yNegEdge == true || blocks[index].zPosEdge == true|| blocks[index].zNegEdge == true ){
             if (blocks[index].xPosEdge == true){
+                //cout << "CalculateCollisionsXP"<< endl;
                 blocks[index].CalculateCollisionsXP();
             }else if (blocks[index].xNegEdge == true){
+                //cout << "CalculateCollisionsXN"<< endl;
                 blocks[index].CalculateCollisionsXN();
             }else if  (blocks[index].yPosEdge == true){
+                //cout << "CalculateCollisionsYP"<< endl;
                 blocks[index].CalculateCollisionsYP();
             }else if (blocks[index].yNegEdge == true){
+                //cout << "CalculateCollisionsYN"<< endl;
                 blocks[index].CalculateCollisionsYN();
             }else if (blocks[index].zPosEdge == true){
+                //cout << "CalculateCollisionsZP"<< endl;
                 blocks[index].CalculateCollisionsZP();
             }else if (blocks[index].zNegEdge == true){
+                //cout << "CalculateCollisionsZN"<< endl;
                 blocks[index].CalculateCollisionsZN();
             }
         }

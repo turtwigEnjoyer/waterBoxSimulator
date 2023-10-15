@@ -12,12 +12,12 @@ int main(int argc, char** argv)
 	// Particles for now are stored in a class static array
 	int out= pargs::checkParams(argc, argv, singletonGrid);
 	if(out<0) return out;
-	singletonGrid.initializeBlocks(); //Blocks, no se si aqui tenemos que cambiarlo para que haga las funciones que cambiaste el otro día?s
+	singletonGrid.initializeBlocks(); //Blocks, no se si aqui tenemos que cambiarlo para que haga las funciones que cambiaste el otro día?
 
 	int timeSteps=100;
 	//1000 takes 815 seconds
 	//100 takes 8s With ParticlePos 6s with particle only
-	//300 Takes 54s wtih ParticlePos 49s without. Difference seeems linear but iteration growth isnt?
+	//300 Takes 54s wtih ParticlePos 49s without. Difference seeems linear but iteration growth isnt?  of 
 	auto start = chrono::high_resolution_clock::now();
 
 	for(int i=0;i<timeSteps;i++)
