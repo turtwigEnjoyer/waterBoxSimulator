@@ -16,13 +16,9 @@
         {
             "type": "shell",
             "label": "buildRelease",
-            "command": "cmake",
-            "args": [
-                "-B release",
-                "-DCMAKE_BUILD_TYPE=Release"
-            ],
+            "command": "make",
             "options": {
-                "cwd": "${workspaceFolder}"
+                "cwd": "${workspaceFolder}/release"
             },
             "problemMatcher": [
                 "$gcc"
@@ -30,29 +26,6 @@
             "group": "build",
             "detail": "Generate Release Version"
         },
-        {
-            "type": "cppbuild",
-            "label": "C/C++: gcc compilar archivo activo",
-            "command": "/usr/bin/gcc",
-            "args": [
-                "-fdiagnostics-color=always",
-                "-g",
-                "${file}",
-                "-o",
-                "${fileDirname}/${fileBasenameNoExtension}"
-            ],
-            "options": {
-                "cwd": "${fileDirname}"
-            },
-            "problemMatcher": [
-                "$gcc"
-            ],
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            },
-            "detail": "Tarea generada por el depurador."
-        }
     ],
     "version": "2.0.0"
 }
