@@ -185,4 +185,52 @@ void particle::CalculateCollisionsZN(){
 }
 
 
-//Particles motion 
+//Boundarie´s functions for particles
+void particle::CalculateBoundariesParXP(){
+    double difx = px - XMIN;
+    if(difx < 0){
+        px = XMIN - difx;
+        vx = -vx;
+        hvx = -hvx;
+    }
+}
+void particle::CalculateBoundariesParXN(){
+    double difx = XMAX - px;
+    if(difx < 0){
+        px = XMAX + difx;
+        vx = -vx;
+        hvx = -hvx;        
+    }
+}
+void particle::CalculateBoundariesParYP(){
+    double dify = py - YMIN;
+    if(dify < 0){
+        py = YMIN - dify;
+        vy = -vy;
+        hvy = -hvy;
+    }
+}
+void particle::CalculateBoundariesParYN(){
+    double dify = YMAX - py;
+    if(dify < 0){
+        py = YMAX + dify;
+        vy = -vy;
+        hvy = -hvy;
+    }
+}
+void particle::CalculateBoundariesParZP(){
+    double difz = pz - ZMIN;
+    if(difz < 0){
+        pz = ZMIN - difz;
+        vz = -vz;
+        hvz = -hvz;
+    }
+}
+void particle::CalculateBoundariesParZN(){
+    double difz = ZMAX - pz;
+    if(difz < 0){
+        pz = ZMAX + difz;
+        vz = -vz;
+        hvz = -hvz;
+    }
+}

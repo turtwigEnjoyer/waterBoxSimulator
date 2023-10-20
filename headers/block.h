@@ -40,6 +40,12 @@ class block{
       void CalculateCollisionsYN();//Collision With Y Function
       void CalculateCollisionsZP();//Collision With Z Function
       void CalculateCollisionsZN();//Collision With Z Function
+      void CalculateBoundariesXP();
+      void CalculateBoundariesXN();
+      void CalculateBoundariesYP();
+      void CalculateBoundariesYN();
+      void CalculateBoundariesZP();
+      void CalculateBoundariesZN();
 
       //for tests 
       size_t GetParticlesSize();

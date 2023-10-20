@@ -200,4 +200,34 @@ void block::CalculateCollisionsZN(){
     }
 }
 
-
+//Boundarie's functions 
+void block::CalculateBoundariesXP(){
+    for (size_t i= 0; i<particles.size(); i++){
+        particles[i].CalculateBoundariesParXP();
+    }
+}
+void block::CalculateBoundariesXN(){
+    for (size_t i= 0; i<particles.size(); i++){
+        particles[i].CalculateBoundariesParXN();
+    }
+}
+void block::CalculateBoundariesYP(){
+    for (size_t i= 0; i<particles.size(); i++){
+        particles[i].CalculateBoundariesParYP();
+    }
+}
+void block::CalculateBoundariesYN(){
+    for (size_t i= 0; i<particles.size(); i++){
+        particles[i].CalculateBoundariesParYN();
+    }
+}
+void block::CalculateBoundariesZP(){
+    for (size_t i= 0; i<particles.size(); i++){
+        particles[i].CalculateBoundariesParZP();
+    }
+}
+void block::CalculateBoundariesZN(){
+    for (size_t i= 0; i<particles.size(); i++){
+        particles[i].CalculateBoundariesParZN();
+    }
+}

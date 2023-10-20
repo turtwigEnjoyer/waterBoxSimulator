@@ -363,3 +363,23 @@ void grid::CalculateCollisions(){
         }
     }
 }
+
+void grid::CalculateBoundaries(){
+    for (size_t index =0; index< blocks.size(); index++){ 
+        if (blocks[index].xPosEdge == true || blocks[index].xNegEdge == true || blocks[index].yPosEdge == true || blocks[index].yNegEdge == true || blocks[index].zPosEdge == true|| blocks[index].zNegEdge == true ){
+            if (blocks[index].xPosEdge == true){
+                blocks[index].CalculateBoundariesXP();
+            }else if (blocks[index].xNegEdge == true){
+                blocks[index].CalculateBoundariesXN();
+            }else if  (blocks[index].yPosEdge == true){
+                blocks[index].CalculateBoundariesYP();
+            }else if (blocks[index].yNegEdge == true){
+                blocks[index].CalculateBoundariesYN();
+            }else if (blocks[index].zPosEdge == true){
+                blocks[index].CalculateBoundariesZP();
+            }else if (blocks[index].zNegEdge == true){
+                blocks[index].CalculateBoundariesZN();
+            }
+        }
+    }
+}

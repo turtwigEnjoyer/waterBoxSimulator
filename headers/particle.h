@@ -70,6 +70,14 @@ class particle{
     void CalculateCollisionsYN();
     void CalculateCollisionsZP();
     void CalculateCollisionsZN();
+
+    //Boundarie´s functions for particles
+    void CalculateBoundariesParXP();
+    void CalculateBoundariesParXN();
+    void CalculateBoundariesParYP();
+    void CalculateBoundariesParYN();
+    void CalculateBoundariesParZP();
+    void CalculateBoundariesParZN();
     
 
 
