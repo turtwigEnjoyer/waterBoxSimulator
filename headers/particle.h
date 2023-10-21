@@ -71,6 +71,9 @@ class particle{
     void CalculateCollisionsZP();
     void CalculateCollisionsZN();
 
+    // Particles motion
+    void CalculateParticlesMotionPar();
+
     //Boundarie´s functions for particles
     void CalculateBoundariesParXP();
     void CalculateBoundariesParXN();

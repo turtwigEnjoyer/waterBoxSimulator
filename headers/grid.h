@@ -43,6 +43,7 @@ class grid{
         void DensityTransformations();
         void AccelerationTransfer();
         void CalculateCollisions(); //Collision's function
+        void CalculateParticlesMotion();
         void CalculateBoundaries();
         
         void printGridInfo(int numberParticles);

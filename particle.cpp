@@ -184,6 +184,18 @@ void particle::CalculateCollisionsZN(){
     }
 }
 
+//Particles motion
+void particle::CalculateParticlesMotionPar(){
+    px = px + hvx*T_STEP + ax*(T_STEP*T_STEP);
+    py = py + hvy*T_STEP + ay*(T_STEP*T_STEP);
+    pz = pz + hvz*T_STEP + az*(T_STEP*T_STEP);
+    vx = hvx +((ax*T_STEP)/2);
+    vy = hvy +((ay*T_STEP)/2);
+    vz = hvz +((az*T_STEP)/2);
+    hvx = hvx + ax*T_STEP;
+    hvy = hvy + ay*T_STEP;
+    hvz = hvz + az*T_STEP;
+}
 
 //Boundarie´s functions for particles
 void particle::CalculateBoundariesParXP(){

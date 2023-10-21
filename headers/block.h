@@ -40,6 +40,7 @@ class block{
       void CalculateCollisionsYN();//Collision With Y Function
       void CalculateCollisionsZP();//Collision With Z Function
       void CalculateCollisionsZN();//Collision With Z Function
+      void CalculateParticlesMotion();
       void CalculateBoundariesXP();
       void CalculateBoundariesXN();
       void CalculateBoundariesYP();
