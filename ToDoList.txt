@@ -1,0 +1,140 @@
+Esto es en referencia a la ultima pagina de la descripcion del proyecto
+en la que nos pide que dividamos el proyecto en tasks pequeños e indivisibles
+
+PARTE 1: QUE EL PROYECTO FUNCIONE
+
+
+BASE WORK
+    CMAKE configuration
+        Creation of release version
+        Creation of Debug version
+    Create class Grid
+    Create class Particle
+        Create all variables to be used
+    Create class block
+    Convert main arguments to clean code (by .clang standards)
+
+INPUT FILES
+    Implement reading from binary file functions
+    Initialize Grid from INPUT
+        Calculate Simulation Parameters
+        Calculate block number, block size
+        Calculate useful constants (h^2, h^6 etc)
+    initialize blocks
+    store blocks on Grid
+    Initialize class Particle from input file
+        ALL NUMBERS MUST BE CONVERTED TO FLOAT
+    determine a particles corresponding block
+    Store particles in their corresponding block
+
+
+SIMULATION STAGES
+
+4.1 Program Parsing
+    Check nts is integer
+    Check nts is positive
+    Check inputFile can be read
+    Check outputFIle can be written on
+    Check header = number of particles in file
+        Calculate input file size
+        Error message if not
+4.2 Simulation Initialization
+ Print all read parameters from INPUT in cout
+
+4.3 Simulation processing
+4.3.1 Repositioning particles   
+    Check every particle is in correct block
+        Loop through Grid, block and check particle
+        Particle checker functions
+    Move particle to correct block if needed
+
+4.3.2 Acceleration Computations
+    Set all densities and accelerations to 0, gravity
+    Densities Increase
+        Write increase formula
+        Loop through blocks in a way that they wont be calc twice
+            Try to do this optimally
+        Loop through particles in two blocks and calculate distances
+            Apply densities increase to both particles
+        Loop through particles in their own block
+        
+    Densities Transformation
+        Write Loop to iterate through particles
+        Create function for the linTransform
+    Acceleration transfer 
+        Loop through particles like in DENSITIES Increase
+        Calculate Distances between two particles
+        Distance cleaning function  
+            (instead of the modulus, use math.max now)
+        Calculate Acceleration Step
+            This operation has a lot of floats. It would be great to optimize
+        Apply Accceleration step to both particles
+
+    Particle Collisions
+        Determine if a block is an edge
+        Collisions x-axis
+            Loop only through x axis blocks
+            Create function to apply first linear Transformation
+            Create function "difference to the bound"
+            Compare difference to bound to 10^-10
+            Update acceleration
+        Collisions y-axis
+            Loop only through y axis
+            Create same function for y
+        Collisions z axis
+            Loop through z axis
+            Create same function for z
+
+    Particles Motion
+        Loop through Particles
+        Create density transform function
+        Create velocity transform function
+        Create hv transform function
+    Box boundaries interactions
+    X Boundaries
+        Loop for every x edge block
+            Loop through every y, z edges
+        Create dx function 
+        If dx negative --> Collision
+            Update particles position
+                            velocity
+                            hvx
+    Y boundaries
+        Rewrite techniques from X to Y
+    Z Boundaries
+        Rewrite to Z
+
+4.4. Results Storage
+    Sort Particles by ID (In the same order they were written as)
+    STORE ALL RESULTS AS floats
+    Write header (pCount , etc)
+    Loop through sorted particles and write p, hv, v
+
+
+PARTE 2 TESTING :
+    //Esto es abstracto. Añadid tests que creeis que harian falta
+
+    TEST input is read correctly
+    TEST a step of TIME STEP PROCESSING
+        TEST PARTICLE Repositioning
+            Study edge cases and check all
+        Test Accceleration Computations
+            Study edge cases if any
+        Test Density Transformation
+        Test Accceleration transfer
+    Test particle Collisions
+    Test box boundaries interactinos
+    test results Storage
+        Use read fucntion to check if we store what we had exactly
+    
+PARTE 3 : Limpiar CODIGO
+    meter .clang y aplicar correcciones (puede que tardemos mucho, pero no se sabe hasta que se haga)
+
+PARTE 4: ESTUDIAR OPTIMIZACION
+    Estudiar y reescribir funciones necesarias para usar AOS vs Storage
+        Puede que haya que reescribir todo el CODIGO
+    Estudiar posibilidad  de loop merging vs not 
+        reescribir si es necesario
+    //No se todavia que mas optmizaciones podrían exisitir
+
+    
