@@ -364,6 +364,12 @@ void grid::CalculateCollisions(){
     }
 }
 
+void grid::CalculateParticlesMotion(){
+    for(auto i : blocks){
+        i.CalculateParticlesMotion();
+    }
+}
+
 void grid::CalculateBoundaries(){
     for (size_t index =0; index< blocks.size(); index++){ 
         if (blocks[index].xPosEdge == true || blocks[index].xNegEdge == true || blocks[index].yPosEdge == true || blocks[index].yNegEdge == true || blocks[index].zPosEdge == true|| blocks[index].zNegEdge == true ){

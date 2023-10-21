@@ -200,6 +200,13 @@ void block::CalculateCollisionsZN(){
     }
 }
 
+// Particles motion
+void block::CalculateParticlesMotion(){
+    for(auto i: particles){
+        i.CalculateParticlesMotionPar();
+    }
+}
+
 //Boundarie's functions 
 void block::CalculateBoundariesXP(){
     for (size_t i= 0; i<particles.size(); i++){

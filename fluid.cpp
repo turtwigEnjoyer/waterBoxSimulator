@@ -28,6 +28,7 @@ int main(int argc, char** argv)
 		singletonGrid.DensityTransformations(); // Perfroms 4.3.2 Densitie Transformations
 		singletonGrid.AccelerationTransfer();
 		singletonGrid.CalculateCollisions();//Calculate the collision with boolean values of the bocks, to know if they are boundaries or not
+		singletonGrid.CalculateParticlesMotion(); //Performs 4.3.4
 		singletonGrid.CalculateBoundaries(); //Performs 4.3.5
 	} 
 	auto stop = chrono::high_resolution_clock::now();
