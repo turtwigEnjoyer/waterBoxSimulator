@@ -20,7 +20,7 @@ void grid::Load(ifstream& fin){
     fin.read(reinterpret_cast<char*>(&rppm), sizeof(int));
     ppm = rppm;
     h = RAD_MULT / ppm;
-    m= DENSITY * ppm;
+    mass= DENSITY * ppm;
     nx = (int)((XMAX-XMIN)/h);
     ny = (int)((YMAX-YMIN)/h);
     nz = (int)((ZMAX-ZMIN)/h);
@@ -33,16 +33,16 @@ void grid::Load(ifstream& fin){
     //Initialise important "constants"
     grid::H2= pow(h,2);
     grid::H6 = pow(h,6);
-    PI_DIV315 = (315*m)/(M_1_PI*pow(h,9)*64);
-    PI_DIV45 = 45*VISCOSITY*m/(M_PI*H6);
-    PI_DIV15 = PI_DIV45/2;
+    PI_DIV315 = (315*mass)/(M_1_PI*pow(h,9)*64);
+    PI_DIV45 = 45*VISCOSITY*mass/(M_PI*H6);
+    PI_DIV15 = PI_DIV45*STIFFNESS_PRESSURE/(VISCOSITY*2);
 
 }
 void grid::printGridInfo(int numberParticles){
     cout << "Number of particles: " << numberParticles << "\n";
     cout << "Particles per meter: " << ppm << "\n";
     cout << "Smoothing length: " << h << "\n";
-    cout << "Particle mass: " << m << "\n";
+    cout << "Particle mass: " << mass << "\n";
     cout << "Grid size: " << nx << " x " << ny << " x " << nz <<"\n";
     cout << "Number of blocks: " << nx*ny*nz << "\n" ;
     cout << "Block size: " << sx << " x " << sy << " x " << sz << "\n";

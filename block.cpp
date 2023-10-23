@@ -86,7 +86,7 @@ void block::CalculateSelfDistances(){
 }
 void block::ClearDensities(){
     for(auto i: particles){
-        //i.ClearDistances();
+        i.ClearAcceleration();
         i.ClearDensity();
     }
 }

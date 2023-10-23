@@ -21,6 +21,7 @@ class particle{
     static constexpr TPrecisionInfo VISCOSITY = 0.4;
     static constexpr TPrecisionInfo P_SIZE =0.0002;
     static constexpr TPrecisionInfo T_STEP =0.001;
+    static constexpr TPrecisionInfo GRAVITY = -9.8;
 
     int id;
     //TBlockIndex blockIndex; //Is it really useful?
@@ -60,6 +61,7 @@ class particle{
     void ClearDensity();
     void DensityTransformation();
     void ClearDistances();
+    void ClearAcceleration();
     void CalculateAccelerations(particle& other);
   
   

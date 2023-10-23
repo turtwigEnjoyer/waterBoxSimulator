@@ -9,11 +9,12 @@ class grid{
         constexpr static TPrecisionInfo VISCOSITY =0.4;
         constexpr static TPrecisionInfo RAD_MULT =1.695; 
         constexpr static TPrecisionInfo DENSITY =1000.0;
+        constexpr static TPrecisionInfo STIFFNESS_PRESSURE = 3.0;
 
         vector<block> blocks;
 
         TPrecisionInfo ppm;
-        TPrecisionInfo h,m; //smoothing distance and mass
+        TPrecisionInfo mass; 
         TPrecisionInfo sx,sy,sz; //Size of blocks
         int nx, ny, nz; //Number of blocks
 
@@ -25,7 +26,7 @@ class grid{
     
     public:
         static grid* pSingleton;
-        TPrecisionInfo H2, H6;
+        TPrecisionInfo h, H2, H6;
         TPrecisionInfo PI_DIV15, PI_DIV45, PI_DIV315;
     //Should assign particles to their respective blocks
     public:
