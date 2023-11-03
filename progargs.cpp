@@ -11,14 +11,21 @@ bool isNumber(const char* str){
 	return true;
 };
 
-void pargs::writeOutput(ofstream& fout, float ppm, int np, particle* particles, size_t size){
+/*void pargs::writeOutput(ofstream& fout, float ppm, int np, particle* particles, size_t size){
 	//  First we write the header ppm float, np int
 	fout.write(reinterpret_cast<char*>( &ppm),sizeof( ppm));
 	fout.write(reinterpret_cast<char*>( &np), sizeof( np));
-	fout.write(reinterpret_cast<const char*>(particles), size * sizeof(particle));
-
+	//fout.write(reinterpret_cast<const char*>(particles), size * sizeof(particle));
 	return;
-};
+};*/
+
+void pargs::writeOutput(ofstream& fout, grid& singletonGrid){
+	TPrecisionInfo ppm = singletonGrid.GetPPM();
+	int np = singletonGrid.countParticles();
+	fout.write(reinterpret_cast<char*>(&ppm),sizeof( ppm));
+	fout.write(reinterpret_cast<char*>( &np), sizeof( np));
+}
+
 void pargs::readInput(char* filename, grid& singletonGrid){
 
 	//We are first going to read and store Np, and then store an array of particles? 
@@ -77,7 +84,7 @@ int pargs::checkParams(int argc, char** argv, grid& pSingelton) {
 	}
 
 	ofstream fout;
-/* 	fout.open(argv[3], std::ios::binary | std::ios::out);
+ 	/*fout.open(argv[3], std::ios::binary | std::ios::out);
 	if(!fout){
 		cout << "Error: Cannot open " << argv[3] << " for writing\n";
 		return -4;

@@ -11,6 +11,8 @@ int main(int argc, char** argv)
 	//This will initialize each particle
 	// Particles for now are stored in a class static array
 	int out= pargs::checkParams(argc, argv, singletonGrid);
+	ofstream fout;
+
 	if(out<0) return out;
 	singletonGrid.initializeBlocks(); //Blocks, no se si aqui tenemos que cambiarlo para que haga las funciones que cambiaste el otro día?
 
@@ -34,6 +36,8 @@ int main(int argc, char** argv)
 	auto duration = chrono::duration_cast<chrono::microseconds>(stop - start);
 
 	cout << timeSteps<< " requiere "<< duration.count() <<endl;
+	
+	//cout << "número de partículas:" << singletonGrid.countParticles();
 	//MISSING FORMULAS
 	
 	return 0;

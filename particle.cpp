@@ -105,6 +105,24 @@ TPrecisionInfo particle::GetY() const{
 TPrecisionInfo particle::GetZ() const{
     return pz;
 }
+TPrecisionInfo particle::GetVX() const{
+    return vx;
+}
+TPrecisionInfo particle::GetVY() const{
+    return vy;
+}
+TPrecisionInfo particle::GetVZ() const{
+    return vz;
+}
+TPrecisionInfo particle::getHVX() const{
+    return hvx;
+}
+TPrecisionInfo particle::getHVY() const{
+    return hvy;
+}
+TPrecisionInfo particle::getHVZ() const{
+    return hvz;
+}
 particle::TId particle::GetId() const{
     return id;
 }
@@ -119,6 +137,10 @@ TPrecisionInfo particle::GetAY() const{
 }
 TPrecisionInfo particle::GetAZ() const{
     return az;
+}
+
+bool particle::compareById(const particle &a, const particle &b){
+    return a.GetId() < b.GetId();
 }
 
 

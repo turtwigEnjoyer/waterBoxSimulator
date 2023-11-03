@@ -231,3 +231,11 @@ void block::CalculateBoundariesZN(){
         particles[i].CalculateBoundariesParZN();
     }
 }
+
+vector<particle::PParticle> block::GetParticles(){
+    return particles;
+}
+
+/*void SortParticles(){
+    std::sort()
+}*/
