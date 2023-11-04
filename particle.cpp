@@ -74,10 +74,8 @@ void particle::Sload(ifstream& fin, int pCount){
  */
 TPrecisionInfo particle::CalculateDistance(PParticle other)
 {
-    TPrecisionInfo dx=(px-other.GetX())*(px-other.GetX());
-    TPrecisionInfo dy= pow(py-other.GetY(),2);
-    TPrecisionInfo dz = pow(pz-other.GetZ(),2);
-    return DensityIncrease(dx+dy+dz);
+    TPrecisionInfo dist =pow((px-other.GetX()),2) + pow(py-other.GetY(),2) +pow(pz-other.GetZ(),2);
+    return DensityIncrease(dist);
 
 }
 
@@ -151,9 +149,27 @@ void particle::AddDensity(TPrecisionInfo increase){
 void particle::ClearDensity(){
     density= 0;
 }
+void particle::ClearAcceleration(){
+    ax=0;
+    ay= GRAVITY;
+    az=0;
+}
 void particle::CalculateAccelerations(particle& other){
-    //NOt funtional yet
-    other.ax++;
+    //Calculate modulus
+        TPrecisionInfo mod =pow((px-other.GetX()),2) + pow(py-other.GetY(),2) +pow(pz-other.GetZ(),2);
+        TPrecisionInfo dist = max(mod,pow(10.0,-12));
+        //We create this to avoid calculating it all 3 times, also it makes function more readable and i think it makes use of spatial locality
+        TPrecisionInfo distanceDensityConstant = GRID.PI_DIV15 * pow((GRID.h-dist),2)/dist * (density +other.density-2*FLUID_DENSITY);
+        TPrecisionInfo accelerationStepX = (px-other.GetX())*distanceDensityConstant+(vx-other.vx)*GRID.PI_DIV45;
+        ax= ax + accelerationStepX;
+        other.ax = ax - accelerationStepX;
+        TPrecisionInfo accelerationStepY = (py-other.GetY())*distanceDensityConstant+(vy-other.vy)*GRID.PI_DIV45;
+        ay= ay + accelerationStepY;
+        other.ay = ay - accelerationStepY;
+        TPrecisionInfo accelerationStepZ = (pz-other.GetZ())*distanceDensityConstant+(vz-other.vz)*GRID.PI_DIV45;
+        az= az + accelerationStepZ;
+        other.az = az - accelerationStepZ;
+
 }
 
 //Funtions of Collisions Blocks
@@ -206,6 +222,18 @@ void particle::CalculateCollisionsZN(){
     }
 }
 
+//Particles motion
+void particle::CalculateParticlesMotionPar(){
+    px = px + hvx*T_STEP + ax*(T_STEP*T_STEP);
+    py = py + hvy*T_STEP + ay*(T_STEP*T_STEP);
+    pz = pz + hvz*T_STEP + az*(T_STEP*T_STEP);
+    vx = hvx +((ax*T_STEP)/2);
+    vy = hvy +((ay*T_STEP)/2);
+    vz = hvz +((az*T_STEP)/2);
+    hvx = hvx + ax*T_STEP;
+    hvy = hvy + ay*T_STEP;
+    hvz = hvz + az*T_STEP;
+}
 
 //Boundarie´s functions for particles
 void particle::CalculateBoundariesParXP(){

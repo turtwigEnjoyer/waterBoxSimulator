@@ -24,11 +24,12 @@ int main(int argc, char** argv)
 	for(int i=0;i<timeSteps;i++)
 	{
 		//4.3.2
-		singletonGrid.ClearDensities(); //Sets Distances to 0. Doesnt set acceleration to 0 yet
+		singletonGrid.ClearDensities(); //Sets Distances to 0 AND accelerations to 0,gravity,0
 		singletonGrid.DensityIncrease(); //Performs 4.3.2 Densities Increase
 		singletonGrid.DensityTransformations(); // Perfroms 4.3.2 Densitie Transformations
-		singletonGrid.AccelerationTransfer();
+		singletonGrid.AccelerationTransfer(); // Acceleration Transfer. Currently takes up HALF RUN TIME --> NEEDS PERFORMANCE EVAL
 		singletonGrid.CalculateCollisions();//Calculate the collision with boolean values of the bocks, to know if they are boundaries or not
+		singletonGrid.CalculateParticlesMotion(); //Performs 4.3.4
 		singletonGrid.CalculateBoundaries(); //Performs 4.3.5
 	} 
 	auto stop = chrono::high_resolution_clock::now();

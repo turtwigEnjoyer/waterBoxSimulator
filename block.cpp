@@ -86,7 +86,7 @@ void block::CalculateSelfDistances(){
 }
 void block::ClearDensities(){
     for(auto i: particles){
-        //i.ClearDistances();
+        i.ClearAcceleration();
         i.ClearDensity();
     }
 }
@@ -197,6 +197,13 @@ void block::CalculateCollisionsZN(){
     for (size_t i= 0; i<particles.size(); i++){
         particles[i].CalculateCollisionsZN();
         //cout << "CalculateCollisionsZN"<< endl;
+    }
+}
+
+// Particles motion
+void block::CalculateParticlesMotion(){
+    for(auto i: particles){
+        i.CalculateParticlesMotionPar();
     }
 }
 
