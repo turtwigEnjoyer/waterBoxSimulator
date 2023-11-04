@@ -22,8 +22,27 @@ bool isNumber(const char* str){
 void pargs::writeOutput(ofstream& fout, grid& singletonGrid){
 	TPrecisionInfo ppm = singletonGrid.GetPPM();
 	int np = singletonGrid.countParticles();
-	fout.write(reinterpret_cast<char*>(&ppm),sizeof( ppm));
-	fout.write(reinterpret_cast<char*>( &np), sizeof( np));
+	fout.write(reinterpret_cast<char*>(&ppm),sizeof(ppm));
+	fout.write(reinterpret_cast<char*>(&np), sizeof(np));
+	vector<particle::PParticle> particles = singletonGrid.GetAllParticles();
+	for (auto& particle : singletonGrid.GetAllParticles()) {
+        float data[] = {
+            static_cast<float>(particle.GetX()),
+            static_cast<float>(particle.GetY()),
+            static_cast<float>(particle.GetZ()),
+            static_cast<float>(particle.getHVX()),
+            static_cast<float>(particle.getHVY()),
+            static_cast<float>(particle.getHVZ()),
+            static_cast<float>(particle.GetVX()),
+            static_cast<float>(particle.GetVY()),
+            static_cast<float>(particle.GetVZ())
+        };
+
+        for (auto& value : data) {
+            fout.write(reinterpret_cast<char*>(&value), sizeof(value));
+        }
+    }
+	fout.close();
 }
 
 void pargs::readInput(char* filename, grid& singletonGrid){
@@ -58,7 +77,7 @@ void pargs::readInput(char* filename, grid& singletonGrid){
     particle::Sload(fin, pCount);
 }
 
-int pargs::checkParams(int argc, char** argv, grid& pSingelton) {
+int pargs::checkParams(int argc, char** argv, grid& pSingelton, ofstream& fout) {
  	if (argc != 4) {
 		cout << "Error: Invalid number of arguments: "<< argc-1 << "\n";
 		return -1;
@@ -83,12 +102,11 @@ int pargs::checkParams(int argc, char** argv, grid& pSingelton) {
 		return -3;
 	}
 
-	ofstream fout;
- 	/*fout.open(argv[3], std::ios::binary | std::ios::out);
+ 	fout.open(argv[3], std::ios::binary | std::ios::out);
 	if(!fout){
 		cout << "Error: Cannot open " << argv[3] << " for writing\n";
 		return -4;
-	} */
+	} 
 	return 1;
 
 }
