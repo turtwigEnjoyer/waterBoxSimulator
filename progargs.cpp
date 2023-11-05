@@ -59,7 +59,7 @@ void pargs::readInput(char* filename, grid& singletonGrid){
     particle::Sload(fin, pCount);
 }
 
-int pargs::checkParams(int argc, char** argv, grid& pSingelton, ofstream& fout) {
+int pargs::checkParams(int argc, char** argv, grid& pSingelton) {
  	if (argc != 4) {
 		cout << "Error: Invalid number of arguments: "<< argc-1 << "\n";
 		return -1;
@@ -89,7 +89,7 @@ int pargs::checkParams(int argc, char** argv, grid& pSingelton, ofstream& fout) 
 	if(!fout){
 		cout << "Error: Cannot open " << argv[3] << " for writing\n";
 		return -4;
-	} 
+	} */
 	return 1;
 
 }

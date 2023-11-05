@@ -11,6 +11,8 @@ int main(int argc, char** argv)
 	//This will initialize each particle
 	// Particles for now are stored in a class static array
 	int out= pargs::checkParams(argc, argv, singletonGrid);
+	ofstream fout;
+
 	if(out<0) return out;
 	singletonGrid.initializeBlocks(); //Blocks, no se si aqui tenemos que cambiarlo para que haga las funciones que cambiaste el otro día?
 
@@ -33,9 +35,6 @@ int main(int argc, char** argv)
 	} 
 	auto stop = chrono::high_resolution_clock::now();
 	auto duration = chrono::duration_cast<chrono::microseconds>(stop - start);
-
-	//int output = pargs::writeOutput(fout, singletonGrid.ppm, singletonGrid.countParticles(),);
-	pargs::writeOutput(fout, singletonGrid);
 
 	cout << timeSteps<< " requiere "<< duration.count() <<endl;
 	//MISSING FORMULAS
