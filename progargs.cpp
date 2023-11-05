@@ -11,38 +11,20 @@ bool isNumber(const char* str){
 	return true;
 };
 
-/*void pargs::writeOutput(ofstream& fout, float ppm, int np, particle* particles, size_t size){
+void pargs::writeOutput(ofstream& fout, float ppm, int np, particle* particles, size_t size){
 	//  First we write the header ppm float, np int
 	fout.write(reinterpret_cast<char*>( &ppm),sizeof( ppm));
 	fout.write(reinterpret_cast<char*>( &np), sizeof( np));
-	//fout.write(reinterpret_cast<const char*>(particles), size * sizeof(particle));
+	fout.write(reinterpret_cast<const char*>(particles), size * sizeof(particle));
+
 	return;
-};*/
+};
 
 void pargs::writeOutput(ofstream& fout, grid& singletonGrid){
 	TPrecisionInfo ppm = singletonGrid.GetPPM();
 	int np = singletonGrid.countParticles();
-	fout.write(reinterpret_cast<char*>(&ppm),sizeof(ppm));
-	fout.write(reinterpret_cast<char*>(&np), sizeof(np));
-	vector<particle::PParticle> particles = singletonGrid.GetAllParticles();
-	for (auto& particle : singletonGrid.GetAllParticles()) {
-        float data[] = {
-            static_cast<float>(particle.GetX()),
-            static_cast<float>(particle.GetY()),
-            static_cast<float>(particle.GetZ()),
-            static_cast<float>(particle.getHVX()),
-            static_cast<float>(particle.getHVY()),
-            static_cast<float>(particle.getHVZ()),
-            static_cast<float>(particle.GetVX()),
-            static_cast<float>(particle.GetVY()),
-            static_cast<float>(particle.GetVZ())
-        };
-
-        for (auto& value : data) {
-            fout.write(reinterpret_cast<char*>(&value), sizeof(value));
-        }
-    }
-	fout.close();
+	fout.write(reinterpret_cast<char*>(&ppm),sizeof( ppm));
+	fout.write(reinterpret_cast<char*>( &np), sizeof( np));
 }
 
 void pargs::readInput(char* filename, grid& singletonGrid){
@@ -102,7 +84,8 @@ int pargs::checkParams(int argc, char** argv, grid& pSingelton, ofstream& fout) 
 		return -3;
 	}
 
- 	fout.open(argv[3], std::ios::binary | std::ios::out);
+	ofstream fout;
+ 	/*fout.open(argv[3], std::ios::binary | std::ios::out);
 	if(!fout){
 		cout << "Error: Cannot open " << argv[3] << " for writing\n";
 		return -4;

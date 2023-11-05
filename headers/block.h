@@ -48,9 +48,6 @@ class block{
       void CalculateBoundariesZP();
       void CalculateBoundariesZN();
 
-      vector<particle::PParticle> GetParticles();
-      //void SortParticles();
-
       //for tests 
       size_t GetParticlesSize();
       particle::PParticle GetParticleAtIndex(size_t index);

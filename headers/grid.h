@@ -38,11 +38,6 @@ class grid{
         void PutInBlock(particle::PParticle p, int whichBlock);
         int PutInBlock(ParticlePos pos);
         void PutInBlock(particle::PParticle particle);
-
-        TPrecisionInfo GetPPM() const;
-        vector<block> GetBlocks();
-        vector<particle::PParticle> GetAllParticles(); //Return all the particles of the grid sorted
- 
          
         void DensityIncrease();
         void ClearDensities();
@@ -54,7 +49,7 @@ class grid{
         
         void printGridInfo(int numberParticles);
 
-        int countParticles();
+        void countParticles();
         //std::move is more useful
 /*         void Move(particle::PParticle pParticula, TBlockIndex indiceOrigen, TBlockIndex indiceDestin); */
         TBlockIndex BlockIndex(vector<TPrecisionInfo> positions);

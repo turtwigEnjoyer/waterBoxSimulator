@@ -47,17 +47,6 @@ void grid::printGridInfo(int numberParticles){
     cout << "Number of blocks: " << nx*ny*nz << "\n" ;
     cout << "Block size: " << sx << " x " << sy << " x " << sz << "\n";
 }
-
-int grid::countParticles(){
-    int numberParticles = 0;
-    int numberOfBlocks = nx * ny * nz;
-    for(int i = 0; i < numberOfBlocks; i++){
-        numberParticles = numberParticles + blocks[i].GetParticlesSize();
-    }
-    return numberParticles;
-}
-
-
 void grid::PutInBlock(particle::PParticle particle, int whichBlock){
     blocks[whichBlock].PushBack(particle);
 }
@@ -70,24 +59,6 @@ int grid::PutInBlock(ParticlePos pos){
     int index=BlockIndex(pos.position);
     blocks[index].PushBack(pos);
     return index;
-}
-
-TPrecisionInfo grid::GetPPM() const{
-    return ppm;
-}
-vector<block> grid::GetBlocks(){
-        return blocks;
-    }
-
-vector<particle::PParticle> grid::GetAllParticles(){
-    int numBlocks = nx* ny * nz;
-    std::vector<particle::PParticle> particleVector;
-    for(int i = 0; i < numBlocks; i++){
-        std::vector<particle::PParticle> newParticles = blocks[i].GetParticles();
-        particleVector.insert(std::end(particleVector), std::begin(newParticles), std::end(newParticles));
-    }
-    std::sort(particleVector.begin(), particleVector.end(), particle::compareById);
-    return particleVector;
 }
 /* void grid::Move(particle::PParticle pParticula, TBlockIndex indiceOrigen, TBlockIndex indiceDestino)
 {

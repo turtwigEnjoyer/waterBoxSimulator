@@ -51,18 +51,10 @@ class particle{
     TPrecisionInfo GetX() const;
     TPrecisionInfo GetY() const;
     TPrecisionInfo GetZ() const;
-    TPrecisionInfo GetVX() const;
-    TPrecisionInfo GetVY() const;
-    TPrecisionInfo GetVZ() const;
-    TPrecisionInfo getHVX() const;
-    TPrecisionInfo getHVY() const;
-    TPrecisionInfo getHVZ() const;
     TPrecisionInfo GetDensity() const;
     TPrecisionInfo GetAX() const;
     TPrecisionInfo GetAY() const;
     TPrecisionInfo GetAZ() const;
-    static bool compareById(const particle &a, const particle &b);
-    
    
     
     //Particles functions 

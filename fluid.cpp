@@ -10,8 +10,7 @@ int main(int argc, char** argv)
 
 	//This will initialize each particle
 	// Particles for now are stored in a class static array
-	ofstream fout;
-	int out= pargs::checkParams(argc, argv, singletonGrid, fout);
+	int out= pargs::checkParams(argc, argv, singletonGrid);
 	if(out<0) return out;
 	singletonGrid.initializeBlocks(); //Blocks, no se si aqui tenemos que cambiarlo para que haga las funciones que cambiaste el otro día?
 
@@ -39,8 +38,6 @@ int main(int argc, char** argv)
 	pargs::writeOutput(fout, singletonGrid);
 
 	cout << timeSteps<< " requiere "<< duration.count() <<endl;
-	
-	//cout << "número de partículas:" << singletonGrid.countParticles();
 	//MISSING FORMULAS
 	
 	return 0;
